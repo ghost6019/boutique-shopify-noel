@@ -1,0 +1,51 @@
+{{ 'sections.css' | asset_url | stylesheet_tag }}
+
+<section class="page-main">
+  <div class="page-width">
+    <header class="section__header">
+      <h1 class="section__title section__title--wide">{{ blog.title }}</h1>
+    </header>
+
+    {%- paginate blog.articles by 9 -%}
+      {%- if blog.articles.size == 0 -%}
+        <p class="empty-state">Aucun article pour le moment.</p>
+      {%- else -%}
+        <div class="product-grid product-grid--blog">
+          {%- for article in blog.articles -%}
+            <article class="product-card" data-animate>
+              {%- if article.image != blank -%}
+                <a class="product-card__media media" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+                  {% render 'image', image: article.image, sizes: '(min-width: 990px) 33vw, 100vw', widths: '540,720,900,1200' %}
+                </a>
+              {%- endif -%}
+              <div class="product-card__body">
+                <p class="blog-date">{{ article.published_at | time_tag: format: 'date' }}</p>
+                <h2 class="product-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                <p>{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a class="btn btn--ghost" href="{{ paginate.previous.url }}">← Précédent</a>
+          {%- endif -%}
+          <span class="pagination__current">Page {{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a class="btn btn--ghost" href="{{ paginate.next.url }}">Suivant →</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

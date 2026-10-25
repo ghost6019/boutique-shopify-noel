@@ -1,0 +1,22 @@
+{
+  "current": {
+    "brand_name": "NOM DE MARQUE",
+    "logo_width": 140,
+    "color_text": "#0E1412",
+    "color_background": "#EEF1EF",
+    "color_accent": "#C45C26",
+    "color_accent_hover": "#9A4519",
+    "color_gold": "#E8C56A",
+    "color_border": "#8A9590",
+    "color_text_muted": "#5A6560",
+    "color_button": "#C45C26",
+    "color_button_text": "#FFFFFF",
+    "page_width": 1180,
+    "section_spacing": 112,
+    "type_scale": 100,
+    "animations_enabled": true,
+    "cart_drawer_enabled": true,
+    "sticky_atc_enabled": true,
+    "cart_empty_message": "Votre panier est vide."
+  }
+}

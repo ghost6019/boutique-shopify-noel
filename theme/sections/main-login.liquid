@@ -1,0 +1,78 @@
+<section class="nf-section nf-auth nf-scheme--{{ section.settings.scheme }}" style="--pt: 64; --pb: 96;">
+  <div class="nf-container nf-container--tiny">
+    <div id="CustomerLoginForm" data-login-panel>
+      <h1 class="nf-section__title">{{ 'customer.login.title' | t }}</h1>
+
+      {%- form 'customer_login', class: 'nf-form', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="nf-form-error" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="nf-field">
+          <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+          <input id="CustomerEmail" class="nf-input" type="email" name="customer[email]" autocomplete="email" required>
+        </div>
+        <div class="nf-field">
+          <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+          <input id="CustomerPassword" class="nf-input" type="password" name="customer[password]" autocomplete="current-password" required>
+        </div>
+        <button type="button" class="nf-link-btn" data-toggle-recover>{{ 'customer.login.forgot' | t }}</button>
+        <button type="submit" class="nf-btn nf-btn--primary nf-btn--block nf-btn--lg">{{ 'customer.login.submit' | t }}</button>
+        <a href="{{ routes.account_register_url }}" class="nf-auth__alt">{{ 'customer.login.create_account' | t }}</a>
+      {%- endform -%}
+    </div>
+
+    <div id="RecoverPasswordForm" data-recover-panel hidden>
+      <h2 class="nf-section__title">{{ 'customer.recover.title' | t }}</h2>
+      <p class="nf-section__text">{{ 'customer.recover.text' | t }}</p>
+
+      {%- form 'recover_customer_password', class: 'nf-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="nf-form-success" role="status">{{ 'customer.recover.success' | t }}</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="nf-form-error" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="nf-field">
+          <label for="RecoverEmail">{{ 'customer.login.email' | t }}</label>
+          <input id="RecoverEmail" class="nf-input" type="email" name="email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="nf-btn nf-btn--primary nf-btn--block">{{ 'customer.recover.submit' | t }}</button>
+        <button type="button" class="nf-link-btn" data-toggle-recover>{{ 'customer.recover.cancel' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var login = document.querySelector('[data-login-panel]');
+    var recover = document.querySelector('[data-recover-panel]');
+    if (!login || !recover) return;
+    function toggle(showRecover) {
+      login.hidden = showRecover;
+      recover.hidden = !showRecover;
+    }
+    document.querySelectorAll('[data-toggle-recover]').forEach(function (btn) {
+      btn.addEventListener('click', function () { toggle(recover.hidden); });
+    });
+    if (window.location.hash === '#recover' || recover.querySelector('.nf-form-success, .nf-form-error')) toggle(true);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Connexion",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Palette",
+      "options": [
+        { "value": "dark", "label": "Nuit" },
+        { "value": "light", "label": "Parchemin" }
+      ],
+      "default": "light"
+    }
+  ]
+}
+{% endschema %}

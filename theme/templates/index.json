@@ -1,0 +1,192 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "trust_1": { "type": "trust", "settings": { "icon": "truck", "text": "Livraison soignée" } },
+        "trust_2": { "type": "trust", "settings": { "icon": "shield", "text": "Paiement sécurisé" } },
+        "trust_3": { "type": "trust", "settings": { "icon": "sparkle", "text": "Effet immédiat" } }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3"],
+      "settings": {
+        "kicker": "Lumière de Noël",
+        "title": "Une pièce. Une lumière.",
+        "title_accent": "Une autre histoire.",
+        "subtitle": "Le projecteur LED portable qui transforme votre intérieur en ambiance festive — branché en USB, prêt en quelques secondes.",
+        "cta_label": "Je veux le mien !",
+        "cta_link": "#offre",
+        "layout": "center",
+        "show_orbs": true,
+        "show_brandmark": true
+      }
+    },
+    "trust_strip": {
+      "type": "trust-strip",
+      "blocks": {
+        "item_1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison soignée", "text": "Expédition suivie pour préparer Noël sereinement." } },
+        "item_2": { "type": "item", "settings": { "icon": "return", "title": "Retours simples", "text": "Politique claire, détaillée dans vos pages légales." } },
+        "item_3": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "Checkout Shopify protégé." } },
+        "item_4": { "type": "item", "settings": { "icon": "sparkle", "title": "Effet immédiat", "text": "Ambiance festive en quelques secondes." } }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4"],
+      "settings": {}
+    },
+    "before_after": {
+      "type": "before-after",
+      "settings": {
+        "eyebrow": "La différence",
+        "title": "Même pièce. Autre monde.",
+        "copy": "Faites glisser pour voir comment une seule lumière change toute l’ambiance.",
+        "before_label": "Avant",
+        "after_label": "Après",
+        "hint": "← Faites glisser pour comparer →"
+      }
+    },
+    "product_showcase": {
+      "type": "product-showcase",
+      "blocks": {
+        "point_1": { "type": "point", "settings": { "text": "Alimentation USB, mise en route rapide" } },
+        "point_2": { "type": "point", "settings": { "text": "Ambiance festive en quelques secondes" } },
+        "point_3": { "type": "point", "settings": { "text": "Format portable et discret" } }
+      },
+      "block_order": ["point_1", "point_2", "point_3"],
+      "settings": {
+        "badge": "Portable · USB",
+        "flip": false,
+        "eyebrow": "Notre projecteur",
+        "title": "Le geste qui change l’ambiance.",
+        "text": "<p>Compact, portable et alimenté en USB. Placez-le près du sapin ou dans le salon : la lumière fait le reste.</p>",
+        "cta_label": "Je veux le mien !",
+        "cta_link": "#offre"
+      }
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_1": { "type": "step", "settings": { "title": "Branchez", "text": "Connectez simplement le projecteur en USB." } },
+        "step_2": { "type": "step", "settings": { "title": "Placez", "text": "Installez-le près du sapin, dans le salon ou la pièce de votre choix." } },
+        "step_3": { "type": "step", "settings": { "title": "Profitez", "text": "Laissez la lumière créer immédiatement une ambiance festive." } }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "eyebrow": "Comment ça marche",
+        "title": "Trois gestes. Zéro complexité.",
+        "subtitle": "Aucune installation complexe.",
+        "cta_label": "Je veux le mien !",
+        "cta_link": "#offre"
+      }
+    },
+    "video": {
+      "type": "video",
+      "settings": {
+        "eyebrow": "En situation",
+        "title": "Voyez l’ambiance se créer.",
+        "subtitle": "Ajoutez votre vidéo : le produit doit se comprendre en quelques secondes, comme sur TikTok.",
+        "cta_label": "Je veux le mien !",
+        "cta_link": "#offre"
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "benefit_1": { "type": "benefit", "settings": { "icon": "sparkle", "title": "Ambiance instantanée", "text": "Une lumière festive qui transforme rapidement l’atmosphère d’une pièce." } },
+        "benefit_2": { "type": "benefit", "settings": { "icon": "check", "title": "Installation simple", "text": "Branchez en USB, placez, c’est prêt." } },
+        "benefit_3": { "type": "benefit", "settings": { "icon": "gift", "title": "Design discret", "text": "Un format compact pensé pour s’intégrer à votre décoration." } },
+        "benefit_4": { "type": "benefit", "settings": { "icon": "heart", "title": "Utilisation intérieure", "text": "Idéal autour du sapin, dans le salon ou pour une soirée de Noël." } },
+        "benefit_5": { "type": "benefit", "settings": { "icon": "truck", "title": "Format portable", "text": "Facile à déplacer selon l’ambiance souhaitée." } },
+        "benefit_6": { "type": "benefit", "settings": { "icon": "sparkle", "title": "Idéal pour Noël", "text": "Une idée cadeau lumineuse pour une atmosphère chaleureuse." } }
+      },
+      "block_order": ["benefit_1", "benefit_2", "benefit_3", "benefit_4", "benefit_5", "benefit_6"],
+      "settings": {
+        "eyebrow": "Pourquoi l’aimer",
+        "title": "Tout ce qu’il faut, rien de superflu.",
+        "subtitle": "Des bénéfices alignés avec le produit réel."
+      }
+    },
+    "usages": {
+      "type": "usages",
+      "blocks": {
+        "usage_1": { "type": "usage", "settings": { "label": "Autour du sapin" } },
+        "usage_2": { "type": "usage", "settings": { "label": "Salon" } },
+        "usage_3": { "type": "usage", "settings": { "label": "Chambre" } },
+        "usage_4": { "type": "usage", "settings": { "label": "Soirée de Noël" } },
+        "usage_5": { "type": "usage", "settings": { "label": "Ambiance festive" } }
+      },
+      "block_order": ["usage_1", "usage_2", "usage_3", "usage_4", "usage_5"],
+      "settings": {
+        "eyebrow": "Dans votre intérieur",
+        "title": "Plusieurs moments. Une même lumière.",
+        "subtitle": "Autour du sapin, dans le salon, pour une soirée douce."
+      }
+    },
+    "offer": {
+      "type": "offer",
+      "blocks": {
+        "perk_1": { "type": "perk", "settings": { "text": "Livraison soignée" } },
+        "perk_2": { "type": "perk", "settings": { "text": "Retours simples" } },
+        "perk_3": { "type": "perk", "settings": { "text": "Paiement sécurisé" } }
+      },
+      "block_order": ["perk_1", "perk_2", "perk_3"],
+      "settings": {
+        "eyebrow": "Notre projecteur",
+        "text": "<p>Un projecteur LED portable pour créer une lumière festive et chaleureuse, simplement.</p>",
+        "button_label": "Je veux le mien !",
+        "payment_note": "Paiement sécurisé · Expédition suivie"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "slot_1": { "type": "placeholder", "settings": { "hint": "Emplacement réservé à un vrai avis client." } },
+        "slot_2": { "type": "placeholder", "settings": { "hint": "Emplacement réservé à un vrai avis client." } },
+        "slot_3": { "type": "placeholder", "settings": { "hint": "Emplacement réservé à un vrai avis client." } }
+      },
+      "block_order": ["slot_1", "slot_2", "slot_3"],
+      "settings": {
+        "eyebrow": "Avis",
+        "title": "Ce que diront vos clients.",
+        "subtitle": "Aucun avis inventé. Connectez une app d’avis ou remplacez ces emplacements dès vos premiers retours réels."
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q_1": { "type": "question", "settings": { "question": "Comment fonctionne le projecteur ?", "answer": "<p>Le projecteur diffuse une lumière festive destinée à créer une ambiance de Noël dans votre intérieur. Branchez-le, placez-le, et profitez de l’atmosphère lumineuse.</p>" } },
+        "q_2": { "type": "question", "settings": { "question": "Comment l’alimenter ?", "answer": "<p>Via une connexion USB. Utilisez une source USB adaptée disponible chez vous.</p>" } },
+        "q_3": { "type": "question", "settings": { "question": "Où puis-je l’utiliser ?", "answer": "<p>Utilisation intérieure : autour du sapin, dans le salon, une chambre, ou pour une soirée de Noël.</p>" } },
+        "q_4": { "type": "question", "settings": { "question": "Est-il facile à installer ?", "answer": "<p>Oui. Branchez en USB, placez-le à l’emplacement souhaité, puis profitez de l’ambiance.</p>" } },
+        "q_5": { "type": "question", "settings": { "question": "Quels sont les délais de livraison ?", "answer": "<p>Les délais dépendent de votre adresse et du mode d’expédition. Consultez la page Livraison pour les informations à jour.</p>" } },
+        "q_6": { "type": "question", "settings": { "question": "Quelle est la politique de retour ?", "answer": "<p>Les conditions de retour sont détaillées dans vos pages Retours et Politique de remboursement.</p>" } }
+      },
+      "block_order": ["q_1", "q_2", "q_3", "q_4", "q_5", "q_6"],
+      "settings": {
+        "eyebrow": "Questions",
+        "title": "Le nécessaire, clairement.",
+        "subtitle": "Des réponses sans promesses inventées."
+      }
+    },
+    "final_cta": {
+      "type": "final-cta",
+      "settings": {
+        "title": "Prêt à créer votre ambiance de Noël ?",
+        "text": "Une lumière chaleureuse, une installation simple, une atmosphère immédiatement plus festive.",
+        "cta_label": "Je veux le mien !",
+        "cta_link": "#offre"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust_strip",
+    "before_after",
+    "product_showcase",
+    "how_it_works",
+    "video",
+    "benefits",
+    "usages",
+    "offer",
+    "reviews",
+    "faq",
+    "final_cta"
+  ]
+}

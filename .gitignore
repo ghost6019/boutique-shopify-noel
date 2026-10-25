@@ -1,0 +1,35 @@
+# Dependencies / tooling
+node_modules/
+.npm/
+.yarn/
+package-lock.json
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs & caches
+*.log
+.cache/
+.tmp/
+temp/
+
+# Shopify CLI local
+.shopify/
+.shopifyignore
+
+.cursor-workspace-check
+.cursor/

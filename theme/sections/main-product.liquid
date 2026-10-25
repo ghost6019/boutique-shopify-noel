@@ -1,0 +1,116 @@
+{{ 'sections.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign form_id = 'ProductForm-' | append: section.id
+  assign current_variant = product.selected_or_first_available_variant
+  assign cta = section.settings.button_label | default: 'Je veux le mien !'
+  assign on_sale = false
+  if current_variant.compare_at_price > current_variant.price
+    assign on_sale = true
+    assign saving = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price
+  endif
+-%}
+
+<section id="offre" class="main-product" data-offer-section data-product-root>
+  <div class="page-width">
+    <div class="product-page">
+      <div class="product-gallery" data-product-gallery>
+        <div class="product-gallery__main">
+          {%- if product.featured_image != blank -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              width="{{ product.featured_image.width }}"
+              height="{{ product.featured_image.height }}"
+              fetchpriority="high"
+              data-gallery-main
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images limit: 8 -%}
+              <button
+                type="button"
+                data-gallery-thumb
+                data-full="{{ image | image_url: width: 1200 }}"
+                data-alt="{{ image.alt | default: product.title | escape }}"
+                aria-label="Voir l'image {{ forloop.index }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                <img src="{{ image | image_url: width: 200 }}" alt="" width="100" height="100" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-page__info">
+        <h1 class="product-title">{{ product.title }}</h1>
+
+        <div class="price">
+          <span class="price__regular" data-price-current>{{ current_variant.price | money }}</span>
+          <s class="price__compare" data-price-compare{% unless on_sale %} hidden{% endunless %}>{% if on_sale %}{{ current_variant.compare_at_price | money }}{% endif %}</s>
+          {%- if on_sale -%}
+            <span class="price__badge">-{{ saving }} %</span>
+          {%- endif -%}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="rte product-description">{{ product.description }}</div>
+        {%- endif -%}
+
+        {% render 'product-form', product: product, form_id: form_id, button_label: cta %}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="trust-row product-perks">
+            {%- for block in section.blocks -%}
+              <li class="trust-item" {{ block.shopify_attributes }}>
+                {% render 'icon', name: 'check', size: 16 %}
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.payment_note != blank -%}
+          <p class="offer__payment-note">{{ section.settings.payment_note }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {% render 'sticky-atc', product: product, form_id: form_id, button_label: cta %}
+</section>
+
+{% stylesheet %}
+  .main-product{position:relative}
+  .main-product .product-form__submit{flex:1;min-width:200px}
+  .product-title{font-size:clamp(2rem,5vw,3rem)}
+  .product-description{margin:1.25rem 0;color:var(--mist-ink,#6b5e55)}
+  .product-perks{margin-top:1.25rem}
+  .product-page__info .price{margin-bottom:.5rem}
+  .product-page__info .product-form{margin-top:1.25rem}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Je veux le mien !" },
+    { "type": "text", "id": "payment_note", "label": "Note sous le bouton", "default": "Paiement sécurisé · Expédition suivie" }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Argument",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texte", "default": "Livraison rapide" }
+      ]
+    }
+  ],
+  "max_blocks": 5
+}
+{% endschema %}

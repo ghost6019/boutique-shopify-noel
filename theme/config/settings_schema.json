@@ -1,0 +1,149 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Nocturne Festive",
+    "theme_author": "NOM DE MARQUE",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://help.shopify.com/",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Marque",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Nom de la marque",
+        "default": "NOM DE MARQUE"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (optionnel)",
+        "info": "Si aucun logo n'est ajouté, le nom de la marque est affiché en texte."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Largeur du logo",
+        "min": 60,
+        "max": 240,
+        "step": 10,
+        "unit": "px",
+        "default": 140
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Image carrée, 32 x 32 px minimum."
+      }
+    ]
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      { "type": "color", "id": "color_text", "label": "Texte principal / encre", "default": "#0E1412" },
+      { "type": "color", "id": "color_background", "label": "Fond (brume)", "default": "#EEF1EF" },
+      { "type": "color", "id": "color_accent", "label": "Accent (cuivre)", "default": "#C45C26" },
+      { "type": "color", "id": "color_accent_hover", "label": "Accent au survol", "default": "#9A4519" },
+      { "type": "color", "id": "color_gold", "label": "Doré (bougie)", "default": "#E8C56A" },
+      { "type": "color", "id": "color_border", "label": "Bordures", "default": "#8A9590" },
+      { "type": "color", "id": "color_text_muted", "label": "Texte secondaire", "default": "#5A6560" },
+      { "type": "color", "id": "color_button", "label": "Bouton", "default": "#C45C26" },
+      { "type": "color", "id": "color_button_text", "label": "Texte du bouton", "default": "#FFFFFF" }
+    ]
+  },
+  {
+    "name": "Mise en page",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Largeur maximale du contenu",
+        "min": 1000,
+        "max": 1440,
+        "step": 20,
+        "unit": "px",
+        "default": 1180
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Espacement vertical des sections",
+        "min": 48,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "default": 104
+      },
+      {
+        "type": "range",
+        "id": "type_scale",
+        "label": "Taille du texte",
+        "min": 90,
+        "max": 120,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Animations et panier",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animations_enabled",
+        "label": "Activer les animations d'apparition",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Utiliser un panier latéral (tiroir)",
+        "info": "Si désactivé, le client est redirigé vers la page panier.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_atc_enabled",
+        "label": "Activer la barre d'achat collante (mobile)",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_message",
+        "label": "Message du panier vide",
+        "default": "Votre panier est vide."
+      }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" }
+    ]
+  },
+  {
+    "name": "SEO et partage",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image de partage par défaut",
+        "info": "Utilisée par Facebook, WhatsApp, etc. quand la page n'a pas d'image. Format conseillé : 1200 x 630 px."
+      },
+      {
+        "type": "text",
+        "id": "twitter_handle",
+        "label": "Compte X / Twitter",
+        "info": "Sans le @, par exemple : nomdemarque"
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+<section class="nf-section nf-auth nf-scheme--{{ section.settings.scheme }}" style="--pt: 64; --pb: 96;">
+  <div class="nf-container nf-container--tiny">
+    <h1 class="nf-section__title">{{ 'customer.register.title' | t }}</h1>
+
+    {%- form 'create_customer', class: 'nf-form', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div class="nf-form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="nf-field">
+        <label for="RegisterFirstName">{{ 'customer.register.first_name' | t }}</label>
+        <input id="RegisterFirstName" class="nf-input" type="text" name="customer[first_name]" autocomplete="given-name" value="{{ form.first_name }}">
+      </div>
+      <div class="nf-field">
+        <label for="RegisterLastName">{{ 'customer.register.last_name' | t }}</label>
+        <input id="RegisterLastName" class="nf-input" type="text" name="customer[last_name]" autocomplete="family-name" value="{{ form.last_name }}">
+      </div>
+      <div class="nf-field">
+        <label for="RegisterEmail">{{ 'customer.login.email' | t }}</label>
+        <input id="RegisterEmail" class="nf-input" type="email" name="customer[email]" autocomplete="email" required value="{{ form.email }}">
+      </div>
+      <div class="nf-field">
+        <label for="RegisterPassword">{{ 'customer.login.password' | t }}</label>
+        <input id="RegisterPassword" class="nf-input" type="password" name="customer[password]" autocomplete="new-password" required>
+      </div>
+      <button type="submit" class="nf-btn nf-btn--primary nf-btn--block nf-btn--lg">{{ 'customer.register.submit' | t }}</button>
+      <a href="{{ routes.account_login_url }}" class="nf-auth__alt">{{ 'customer.register.back_to_login' | t }}</a>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Création de compte",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Palette",
+      "options": [
+        { "value": "dark", "label": "Nuit" },
+        { "value": "light", "label": "Parchemin" }
+      ],
+      "default": "light"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+{%- comment -%}
+  En-tête de section réutilisable.
+  Paramètres : eyebrow, title, subtitle, center (true/false), wide (true/false), tag (h1|h2)
+{%- endcomment -%}
+{%- if eyebrow != blank or title != blank or subtitle != blank -%}
+  <div class="section__header{% if center %} section__header--center{% endif %}"{% if index != blank %} data-index="{{ index }}"{% endif %} data-animate>
+    {%- if eyebrow != blank -%}
+      <span class="section__eyebrow">{{ eyebrow }}</span>
+    {%- endif -%}
+    {%- if title != blank -%}
+      <{{ tag | default: 'h2' }} class="section__title{% if wide %} section__title--wide{% endif %}">{{ title }}</{{ tag | default: 'h2' }}>
+    {%- endif -%}
+    {%- if subtitle != blank -%}
+      <p class="section__subtitle">{{ subtitle }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}

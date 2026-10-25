@@ -1,0 +1,60 @@
+<section class="nf-section nf-contact nf-scheme--{{ section.settings.scheme }}" style="--pt: 48; --pb: 80;">
+  <div class="nf-container nf-container--narrow">
+    <h1 class="nf-section__title">{{ page.title }}</h1>
+
+    {%- if page.content != blank -%}
+      <div class="nf-page__content rte">{{ page.content }}</div>
+    {%- endif -%}
+
+    {%- form 'contact', id: 'ContactForm', class: 'nf-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="nf-form-success" role="status">{{ 'contact.form.success' | t }}</p>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="nf-form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <div class="nf-form__row">
+        <div class="nf-field">
+          <label for="ContactName">{{ 'contact.form.name' | t }}</label>
+          <input id="ContactName" class="nf-input" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+        </div>
+        <div class="nf-field">
+          <label for="ContactEmail">{{ 'contact.form.email' | t }} *</label>
+          <input id="ContactEmail" class="nf-input" type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}">
+        </div>
+      </div>
+
+      <div class="nf-field">
+        <label for="ContactPhone">{{ 'contact.form.phone' | t }}</label>
+        <input id="ContactPhone" class="nf-input" type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}">
+      </div>
+
+      <div class="nf-field">
+        <label for="ContactBody">{{ 'contact.form.message' | t }} *</label>
+        <textarea id="ContactBody" class="nf-input" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+      </div>
+
+      <button type="submit" class="nf-btn nf-btn--primary nf-btn--lg">{{ 'contact.form.send' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulaire de contact",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Palette",
+      "options": [
+        { "value": "dark", "label": "Nuit" },
+        { "value": "light", "label": "Parchemin" }
+      ],
+      "default": "light"
+    }
+  ]
+}
+{% endschema %}

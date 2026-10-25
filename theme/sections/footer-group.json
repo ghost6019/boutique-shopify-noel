@@ -1,0 +1,27 @@
+{
+  "name": "Groupe de pied de page",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_1": { "type": "menu", "settings": { "title": "Navigation", "menu": "main-menu" } },
+        "legal_1": { "type": "legal", "settings": { "title": "Informations" } },
+        "contact_1": {
+          "type": "contact",
+          "settings": {
+            "title": "Contact",
+            "text": "Une question ? Notre équipe vous répond sous 24 h ouvrées."
+          }
+        }
+      },
+      "block_order": ["menu_1", "legal_1", "contact_1"],
+      "settings": {
+        "text": "Des lumières qui transforment votre maison en conte de Noël. Pensé avec soin, livré avec le sourire.",
+        "show_social": true,
+        "show_payment": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

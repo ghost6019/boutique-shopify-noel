@@ -1,0 +1,105 @@
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign cta_label = section.settings.cta_label | default: 'Je veux le mien !'
+-%}
+
+<header class="site-header" data-site-header>
+  <div class="page-width">
+    <div class="site-header__inner">
+      <div class="site-header__left">
+        <button type="button" class="icon-btn menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="MobileNav" aria-label="Ouvrir le menu">
+          {% render 'icon', name: 'menu', size: 22 %}
+        </button>
+        <a class="brand" href="{{ routes.root_url }}">
+          {%- if settings.logo != blank -%}
+            <img
+              src="{{ settings.logo | image_url: width: 480 }}"
+              alt="{{ brand | escape }}"
+              width="{{ settings.logo_width }}"
+              height="{{ settings.logo_width | divided_by: settings.logo.aspect_ratio | round }}"
+              style="width:{{ settings.logo_width }}px;max-height:none"
+            >
+          {%- else -%}
+            {{ brand }}
+          {%- endif -%}
+        </a>
+      </div>
+
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.link | default: '/' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="header-actions">
+        {%- if section.settings.show_cta -%}
+          <a class="btn header-cta" href="{{ section.settings.cta_link | default: '#offre' }}">{{ cta_label }}</a>
+        {%- endif -%}
+        <a class="icon-btn" href="{{ routes.cart_url }}" data-cart-open aria-label="Ouvrir le panier">
+          {% render 'icon', name: 'cart', size: 22 %}
+          <span class="cart-count" data-cart-count data-count="{{ cart.item_count }}">{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="MobileNav" data-mobile-nav>
+    <button type="button" class="mobile-nav__backdrop" data-mobile-close aria-label="Fermer le menu"></button>
+    <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="mobile-nav__top">
+        <span class="brand">{{ brand }}</span>
+        <button type="button" class="icon-btn" data-mobile-close aria-label="Fermer le menu">
+          {% render 'icon', name: 'close', size: 22 %}
+        </button>
+      </div>
+      <nav class="mobile-nav__links" aria-label="Navigation mobile">
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.link | default: '/' }}">{{ block.settings.label }}</a>
+        {%- endfor -%}
+      </nav>
+      {%- if section.settings.show_cta -%}
+        <a class="btn btn--full" href="{{ section.settings.cta_link | default: '#offre' }}">{{ cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</header>
+
+{% stylesheet %}
+  .site-header__left{display:flex;align-items:center;gap:.35rem}
+  .mobile-nav__backdrop{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;cursor:pointer}
+  .mobile-nav__panel{z-index:1}
+  .mobile-nav__top{display:flex;align-items:center;justify-content:space-between}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "En-tête",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "checkbox", "id": "show_cta", "label": "Afficher le bouton d'action", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Je veux le mien !" },
+    { "type": "text", "id": "cta_link", "label": "Lien du bouton", "default": "#offre", "info": "Ancre (#offre) ou lien complet. Sur les autres pages, utilisez /#offre." }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Lien de navigation",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Libellé", "default": "Accueil" },
+        { "type": "text", "id": "link", "label": "Lien", "default": "/", "info": "Exemples : / ou /#faq (la forme /#ancre fonctionne sur toutes les pages)." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "En-tête",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Accueil", "link": "/" } },
+        { "type": "link", "settings": { "label": "Notre projecteur", "link": "/#produit" } },
+        { "type": "link", "settings": { "label": "Comment ça marche", "link": "/#comment-ca-marche" } },
+        { "type": "link", "settings": { "label": "FAQ", "link": "/#faq" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

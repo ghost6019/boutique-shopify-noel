@@ -1,0 +1,102 @@
+{%- comment -%}
+  Formulaire d'ajout au panier (compatible tiroir panier via [data-product-form]).
+  Paramètres :
+    - product        : objet produit (obligatoire)
+    - form_id        : id HTML du formulaire (le bouton collant s'y rattache via l'attribut form)
+    - button_label   : texte du bouton (défaut : « Je veux le mien ! »)
+    - show_quantity  : true (défaut) | false
+{%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign fid = form_id | default: 'ProductForm'
+  assign label = button_label | default: 'Je veux le mien !'
+  assign sold_label = 'Épuisé'
+-%}
+
+{%- form 'product', product, id: fid, class: 'product-form', data-product-form: '' -%}
+  {%- if product.has_only_default_variant -%}
+    <input type="hidden" name="id" value="{{ current_variant.id }}">
+  {%- else -%}
+    <div class="field">
+      <label class="field__label" for="{{ fid }}-variant">Choisir une option</label>
+      <select class="field__input" id="{{ fid }}-variant" name="id" data-variant-select>
+        {%- for variant in product.variants -%}
+          <option
+            value="{{ variant.id }}"
+            {% if variant == current_variant %}selected{% endif %}
+            {% unless variant.available %}disabled{% endunless %}
+            data-price="{{ variant.price | money | escape }}"
+            data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | escape }}{% endif %}"
+            data-available="{{ variant.available }}"
+          >
+            {{- variant.title | escape }}{% unless variant.available %} — {{ sold_label }}{% endunless -%}
+          </option>
+        {%- endfor -%}
+      </select>
+    </div>
+  {%- endif -%}
+
+  <div class="product-form__row">
+    {%- unless show_quantity == false -%}
+      <div class="qty">
+        <button type="button" class="qty__btn" data-qty-step="-1" aria-label="Diminuer la quantité">−</button>
+        <input class="qty__input" type="number" name="quantity" value="1" min="1" inputmode="numeric" data-product-qty aria-label="Quantité">
+        <button type="button" class="qty__btn" data-qty-step="1" aria-label="Augmenter la quantité">+</button>
+      </div>
+    {%- else -%}
+      <input type="hidden" name="quantity" value="1">
+    {%- endunless -%}
+
+    <button
+      type="submit"
+      name="add"
+      class="btn product-form__submit"
+      data-atc
+      data-label="{{ label | escape }}"
+      data-soldout-label="{{ sold_label }}"
+      {% unless current_variant.available %}disabled{% endunless %}
+    >
+      <span data-atc-label>{% if current_variant.available %}{{ label }}{% else %}{{ sold_label }}{% endif %}</span>
+    </button>
+  </div>
+{%- endform -%}
+
+<script>
+  (function () {
+    if (window.__themeProductFormInit) return;
+    window.__themeProductFormInit = true;
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-qty-step]');
+      if (!btn) return;
+      var form = btn.closest('form');
+      var input = form && form.querySelector('[data-product-qty]');
+      if (!input) return;
+      var next = (parseInt(input.value, 10) || 1) + parseInt(btn.getAttribute('data-qty-step'), 10);
+      input.value = Math.max(1, next);
+    });
+
+    document.addEventListener('change', function (e) {
+      var select = e.target.closest('[data-variant-select]');
+      if (!select) return;
+      var option = select.options[select.selectedIndex];
+      var root = select.closest('[data-product-root]') || document;
+      var available = option.getAttribute('data-available') === 'true';
+      var compare = option.getAttribute('data-compare');
+
+      root.querySelectorAll('[data-price-current]').forEach(function (el) {
+        el.textContent = option.getAttribute('data-price');
+      });
+      root.querySelectorAll('[data-price-compare]').forEach(function (el) {
+        el.textContent = compare || '';
+        el.hidden = !compare;
+      });
+      document.querySelectorAll('[data-atc]').forEach(function (btn) {
+        if (root !== document && !root.contains(btn)) return;
+        var label = btn.querySelector('[data-atc-label]');
+        btn.disabled = !available;
+        if (label) label.textContent = available ? btn.getAttribute('data-label') : btn.getAttribute('data-soldout-label');
+      });
+    });
+  })();
+</script>

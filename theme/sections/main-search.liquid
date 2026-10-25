@@ -1,0 +1,59 @@
+{{ 'sections.css' | asset_url | stylesheet_tag }}
+
+<section class="page-main">
+  <div class="page-width">
+    <header class="section__header">
+      <h1 class="section__title section__title--wide">Recherche</h1>
+    </header>
+
+    <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="SearchInput">Rechercher</label>
+      <input class="field__input" id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Rechercher sur la boutique">
+      <button type="submit" class="btn">Rechercher</button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- paginate search.results by 12 -%}
+        <p class="search-count">{{ search.results_count }} résultat{% if search.results_count > 1 %}s{% endif %} pour « {{ search.terms | escape }} »</p>
+
+        {%- if search.results_count == 0 -%}
+          <p class="empty-state">Aucun résultat. Essayez un autre mot-clé.</p>
+        {%- else -%}
+          <div class="product-grid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- else -%}
+                <article class="product-card product-card--text">
+                  <div class="product-card__body">
+                    <h2 class="product-card__title"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                    <p>{{ item.content | strip_html | truncate: 120 }}</p>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a class="btn btn--ghost" href="{{ paginate.previous.url }}">← Précédent</a>
+            {%- endif -%}
+            <span class="pagination__current">Page {{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}
+              <a class="btn btn--ghost" href="{{ paginate.next.url }}">Suivant →</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Résultats de recherche",
+  "settings": []
+}
+{% endschema %}

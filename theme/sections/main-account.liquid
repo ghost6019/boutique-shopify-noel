@@ -1,0 +1,72 @@
+<section class="nf-section nf-account nf-scheme--{{ section.settings.scheme }}" style="--pt: 48; --pb: 96;">
+  <div class="nf-container">
+    <header class="nf-account__head">
+      <h1 class="nf-section__title">{{ 'customer.account.title' | t }}</h1>
+      <a href="{{ routes.account_logout_url }}" class="nf-btn nf-btn--ghost">{{ 'customer.account.logout' | t }}</a>
+    </header>
+
+    <div class="nf-account__grid">
+      <div class="nf-account__orders">
+        <h2 class="nf-account__subtitle">{{ 'customer.account.orders' | t }}</h2>
+
+        {%- paginate customer.orders by 10 -%}
+          {%- if customer.orders.size > 0 -%}
+            <div class="nf-table-wrap">
+              <table class="nf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ 'customer.orders.number' | t }}</th>
+                    <th scope="col">{{ 'customer.orders.date' | t }}</th>
+                    <th scope="col">{{ 'customer.orders.payment' | t }}</th>
+                    <th scope="col">{{ 'customer.orders.fulfillment' | t }}</th>
+                    <th scope="col">{{ 'customer.orders.total' | t }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for order in customer.orders -%}
+                    <tr>
+                      <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                      <td>{{ order.created_at | time_tag: format: 'date' }}</td>
+                      <td>{{ order.financial_status_label }}</td>
+                      <td>{{ order.fulfillment_status_label }}</td>
+                      <td>{{ order.total_price | money }}</td>
+                    </tr>
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
+          {%- else -%}
+            <p class="nf-empty">{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+          {% render 'pagination', paginate: paginate %}
+        {%- endpaginate -%}
+      </div>
+
+      <aside class="nf-account__details">
+        <h2 class="nf-account__subtitle">{{ 'customer.account.details' | t }}</h2>
+        <p><strong>{{ customer.name }}</strong><br>{{ customer.email }}</p>
+        {%- if customer.default_address != blank -%}
+          <address>{{ customer.default_address | format_address }}</address>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Compte client",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Palette",
+      "options": [
+        { "value": "dark", "label": "Nuit" },
+        { "value": "light", "label": "Parchemin" }
+      ],
+      "default": "light"
+    }
+  ]
+}
+{% endschema %}

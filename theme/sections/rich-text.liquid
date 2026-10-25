@@ -1,0 +1,57 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<section
+  class="nf-section nf-richtext nf-scheme--{{ s.scheme }}"
+  style="--pt: {{ s.padding_top }}; --pb: {{ s.padding_bottom }};"
+  {{ section.shopify_attributes }}
+>
+  <div class="nf-container nf-container--narrow nf-richtext__inner nf-richtext__inner--{{ s.align }}">
+    {%- if s.eyebrow != blank -%}<p class="nf-eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+    {%- if s.heading != blank -%}<h2 class="nf-section__title">{{ s.heading }}</h2>{%- endif -%}
+    {%- if s.text != blank -%}<div class="nf-section__text rte">{{ s.text }}</div>{%- endif -%}
+    {%- if s.button_label != blank and s.button_link != blank -%}
+      <a href="{{ s.button_link }}" class="nf-btn nf-btn--primary nf-btn--lg">{{ s.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Texte enrichi",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Palette",
+      "options": [
+        { "value": "dark", "label": "Nuit" },
+        { "value": "light", "label": "Parchemin" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "center"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Notre histoire" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Racontez ici l'histoire de la marque.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "range", "id": "padding_top", "label": "Marge haute", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Marge basse", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    { "name": "Texte enrichi" }
+  ]
+}
+{% endschema %}

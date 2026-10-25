@@ -1,0 +1,44 @@
+<section class="section" id="derniere-chance">
+  <div class="page-width">
+    <div class="final-cta" data-animate="scale">
+      <div class="final-cta__media">
+        {%- if section.settings.image != blank -%}
+          {% render 'image', image: section.settings.image, sizes: '(min-width: 1180px) 1180px, 100vw' %}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="final-cta__overlay"></div>
+      <div class="final-cta__content">
+        <span class="final-cta__brand">{{ settings.brand_name | default: 'NOM DE MARQUE' }}</span>
+        <h2 class="final-cta__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="final-cta__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a class="btn btn--light" href="{{ section.settings.cta_link | default: '#offre' }}">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .final-cta__media .placeholder-svg{height:100%;min-height:100%}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Appel à l'action final",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image de fond" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Offrez-vous un Noël qui brille" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Une lumière chaleureuse, une installation simple, une atmosphère immédiatement plus festive." },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Je veux le mien !" },
+    { "type": "text", "id": "cta_link", "label": "Lien du bouton", "default": "#offre" }
+  ],
+  "presets": [
+    { "name": "Appel à l'action final" }
+  ]
+}
+{% endschema %}

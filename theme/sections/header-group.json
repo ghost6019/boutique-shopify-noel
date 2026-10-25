@@ -1,0 +1,32 @@
+{
+  "name": "Groupe d'en-tête",
+  "type": "header",
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_1": { "type": "message", "settings": { "text": "Livraison soignée pour Noël" } },
+        "message_2": { "type": "message", "settings": { "text": "Retours simples" } },
+        "message_3": { "type": "message", "settings": { "text": "Paiement sécurisé" } }
+      },
+      "block_order": ["message_1", "message_2", "message_3"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "link_home": { "type": "link", "settings": { "label": "Accueil", "link": "/" } },
+        "link_product": { "type": "link", "settings": { "label": "Notre projecteur", "link": "/#produit" } },
+        "link_how": { "type": "link", "settings": { "label": "Comment ça marche", "link": "/#comment-ca-marche" } },
+        "link_faq": { "type": "link", "settings": { "label": "FAQ", "link": "/#faq" } }
+      },
+      "block_order": ["link_home", "link_product", "link_how", "link_faq"],
+      "settings": {
+        "show_cta": true,
+        "cta_label": "Je veux le mien !",
+        "cta_link": "/#offre"
+      }
+    }
+  },
+  "order": ["announcement_bar", "header"]
+}

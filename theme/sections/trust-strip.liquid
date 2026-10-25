@@ -1,0 +1,69 @@
+{%- if section.blocks.size > 0 -%}
+  <section class="section section--tight" id="garanties">
+    <div class="page-width">
+      <div class="trust-strip" data-animate>
+        {%- for block in section.blocks -%}
+          <div class="trust-strip__item" {{ block.shopify_attributes }}>
+            <span class="trust-strip__icon">{% render 'icon', name: block.settings.icon, size: 20 %}</span>
+            <div>
+              <p class="trust-strip__title">{{ block.settings.title }}</p>
+              {%- if block.settings.text != blank -%}
+                <p class="trust-strip__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .section.section--tight{padding-block:clamp(1.5rem,4vw,2.5rem)}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bandeau de confiance",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Argument",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "truck", "label": "Livraison" },
+            { "value": "return", "label": "Retour" },
+            { "value": "shield", "label": "Bouclier" },
+            { "value": "lock", "label": "Cadenas" },
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "heart", "label": "Cœur" },
+            { "value": "check", "label": "Coche" },
+            { "value": "sparkle", "label": "Étincelle" },
+            { "value": "message", "label": "Message" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Livraison soignée" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Expédition suivie, soignée." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bandeau de confiance",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "title": "Livraison soignée", "text": "Expédition suivie." } },
+        { "type": "item", "settings": { "icon": "return", "title": "Retours simples", "text": "Politique claire dans vos pages légales." } },
+        { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "Checkout Shopify protégé." } },
+        { "type": "item", "settings": { "icon": "sparkle", "title": "Effet immédiat", "text": "Ambiance festive en quelques secondes." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

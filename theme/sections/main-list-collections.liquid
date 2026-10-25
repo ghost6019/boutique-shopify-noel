@@ -1,0 +1,35 @@
+{{ 'sections.css' | asset_url | stylesheet_tag }}
+
+<section class="page-main">
+  <div class="page-width">
+    <header class="section__header">
+      <h1 class="section__title section__title--wide">{{ section.settings.title }}</h1>
+    </header>
+
+    <div class="product-grid">
+      {%- for collection in collections -%}
+        <article class="product-card" data-animate>
+          <a class="product-card__media media" href="{{ collection.url }}" aria-label="{{ collection.title | escape }}">
+            {%- if collection.featured_image != blank -%}
+              {% render 'image', image: collection.featured_image, sizes: '(min-width: 990px) 25vw, 50vw', widths: '360,540,720,900' %}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </a>
+          <div class="product-card__body">
+            <h2 class="product-card__title"><a href="{{ collection.url }}">{{ collection.title }}</a></h2>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Liste des collections",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Collections" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,43 @@
+{%- comment -%}
+  Image responsive avec srcset.
+  Paramètres :
+    - image       : objet image (obligatoire)
+    - sizes       : attribut sizes (défaut 100vw)
+    - class       : classes CSS
+    - loading     : lazy (défaut) | eager
+    - fetchpriority : high | auto
+    - alt         : texte alternatif de remplacement
+    - widths      : largeurs séparées par des virgules
+    - placeholder : nom d'un placeholder Shopify (ex: 'product-1', 'image', 'lifestyle-1')
+{%- endcomment -%}
+{%- liquid
+  assign img_widths = widths | default: '360,540,720,900,1200,1600,2000'
+  assign img_sizes = sizes | default: '100vw'
+  assign img_loading = loading | default: 'lazy'
+  assign img_priority = fetchpriority | default: 'auto'
+  assign width_list = img_widths | split: ','
+-%}
+
+{%- if image != blank -%}
+  <img
+    src="{{ image | image_url: width: 900 }}"
+    srcset="
+      {%- for w in width_list -%}
+        {%- assign w_num = w | plus: 0 -%}
+        {%- if w_num <= image.width -%}
+          {{ image | image_url: width: w_num }} {{ w_num }}w,
+        {%- endif -%}
+      {%- endfor -%}
+    "
+    sizes="{{ img_sizes }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    alt="{{ alt | default: image.alt | escape }}"
+    loading="{{ img_loading }}"
+    fetchpriority="{{ img_priority }}"
+    decoding="async"
+    {% if class != blank %}class="{{ class }}"{% endif %}
+  >
+{%- elsif placeholder != blank -%}
+  {{ placeholder | placeholder_svg_tag: 'nf-placeholder' }}
+{%- endif -%}

@@ -1,0 +1,65 @@
+<section class="section" id="usages">
+  <div class="page-width">
+    {% render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      subtitle: section.settings.subtitle,
+      center: true,
+      wide: true,
+      index: '06'
+    %}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="usages">
+        {%- assign fallbacks = 'usage-tree.jpg,usage-living.jpg,usage-bedroom.jpg,usage-evening.jpg,product-demo.jpg' | split: ',' -%}
+        {%- for block in section.blocks -%}
+          {%- assign fallback = fallbacks[forloop.index0] | default: 'usage-living.jpg' -%}
+          <figure class="usage" data-animate="scale" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {% render 'image', image: block.settings.image, sizes: '(min-width: 900px) 25vw, 50vw', alt: block.settings.label %}
+            {%- else -%}
+              {{ fallback | asset_url | image_tag: loading: 'lazy', alt: block.settings.label }}
+            {%- endif -%}
+            {%- if block.settings.label != blank -%}
+              <figcaption class="usage__label" style="z-index:2">{{ block.settings.label }}</figcaption>
+            {%- endif -%}
+          </figure>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Usages",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Dans votre intérieur" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Plusieurs moments. Une même lumière." },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Autour du sapin, dans le salon, pour une soirée douce." }
+  ],
+  "blocks": [
+    {
+      "type": "usage",
+      "name": "Usage",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "label", "label": "Légende", "default": "Salon" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Usages",
+      "blocks": [
+        { "type": "usage", "settings": { "label": "Autour du sapin" } },
+        { "type": "usage", "settings": { "label": "Salon" } },
+        { "type": "usage", "settings": { "label": "Chambre" } },
+        { "type": "usage", "settings": { "label": "Soirée de Noël" } },
+        { "type": "usage", "settings": { "label": "Ambiance festive" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

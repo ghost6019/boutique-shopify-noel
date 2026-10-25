@@ -1,0 +1,170 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Passer au contenu",
+      "close": "Fermer",
+      "menu": "Menu",
+      "main_navigation": "Navigation principale",
+      "search": "Rechercher",
+      "account": "Mon compte",
+      "cart": "Panier"
+    },
+    "announcement": {
+      "label": "Informations de livraison et de retours"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "page": "Page {{ number }}"
+    },
+    "newsletter": {
+      "email": "Votre adresse e-mail",
+      "subscribe": "S'inscrire",
+      "success": "Merci ! Votre inscription est bien prise en compte."
+    },
+    "404": {
+      "title": "Page introuvable",
+      "text": "La page que vous cherchez n'existe pas ou a été déplacée.",
+      "back_home": "Retour à l'accueil"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "enter": "Entrer",
+      "error": "Mot de passe incorrect."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "adding": "Ajout en cours…",
+      "price_from": "À partir de",
+      "on_sale": "Promo",
+      "quantity": "Quantité",
+      "view_details": "Voir tous les détails",
+      "view_media": "Afficher le média {{ number }}",
+      "share": "Partager par e-mail",
+      "related": "Vous aimerez aussi"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Votre panier",
+      "empty": "Votre panier est vide.",
+      "continue_shopping": "Continuer mes achats",
+      "decrease": "Diminuer la quantité",
+      "increase": "Augmenter la quantité",
+      "quantity": "Quantité",
+      "remove": "Retirer",
+      "subtotal": "Sous-total",
+      "shipping_taxes_note": "Les frais de livraison et les taxes éventuelles sont calculés lors du paiement.",
+      "checkout": "Passer la commande",
+      "view_cart": "Voir le panier",
+      "note": "Instructions pour votre commande (optionnel)",
+      "error": "Une erreur est survenue. Merci de réessayer."
+    }
+  },
+  "collections": {
+    "general": {
+      "all_collections": "Collections",
+      "products_count": {
+        "one": "{{ count }} produit",
+        "other": "{{ count }} produits"
+      },
+      "sort_by": "Trier par",
+      "empty": "Aucun produit dans cette collection pour le moment."
+    }
+  },
+  "blogs": {
+    "general": {
+      "read_more": "Lire l'article",
+      "empty": "Aucun article pour le moment.",
+      "navigation": "Navigation entre les articles",
+      "previous": "Article précédent",
+      "next": "Article suivant",
+      "back_to_blog": "Retour au blog"
+    }
+  },
+  "search": {
+    "general": {
+      "title": "Recherche",
+      "placeholder": "Rechercher dans la boutique",
+      "submit": "Rechercher",
+      "results_count": {
+        "one": "{{ count }} résultat pour « {{ terms }} »",
+        "other": "{{ count }} résultats pour « {{ terms }} »"
+      },
+      "no_results": "Aucun résultat. Essayez avec d'autres mots-clés."
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nom",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "message": "Message",
+      "send": "Envoyer",
+      "success": "Merci pour votre message. Nous vous répondons par e-mail dès que possible."
+    }
+  },
+  "customer": {
+    "login": {
+      "title": "Connexion",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "forgot": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "create_account": "Créer un compte"
+    },
+    "recover": {
+      "title": "Réinitialiser le mot de passe",
+      "text": "Nous vous enverrons un e-mail pour réinitialiser votre mot de passe.",
+      "success": "Un e-mail vous a été envoyé pour réinitialiser votre mot de passe.",
+      "submit": "Envoyer",
+      "cancel": "Annuler"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "submit": "Créer mon compte",
+      "back_to_login": "Retour à la connexion"
+    },
+    "account": {
+      "title": "Mon compte",
+      "logout": "Se déconnecter",
+      "orders": "Historique des commandes",
+      "details": "Détails du compte"
+    },
+    "orders": {
+      "number": "Commande",
+      "date": "Date",
+      "payment": "Paiement",
+      "fulfillment": "Expédition",
+      "total": "Total",
+      "none": "Vous n'avez pas encore passé de commande."
+    },
+    "order": {
+      "title": "Commande {{ name }}",
+      "back": "Retour au compte",
+      "product": "Produit",
+      "shipped_on": "Expédié le {{ date }}",
+      "track": "Suivre le colis",
+      "shipping_address": "Adresse de livraison",
+      "billing_address": "Adresse de facturation"
+    }
+  },
+  "sections": {
+    "before_after": {
+      "range_label": "Faites glisser pour comparer l'avant et l'après"
+    },
+    "featured_product": {
+      "empty": "Sélectionnez un produit dans l'éditeur de thème pour l'afficher ici."
+    },
+    "reviews": {
+      "design_hint": "Section « Avis clients » : ajoutez uniquement de vrais témoignages. Elle reste invisible tant qu'aucun avis n'est renseigné."
+    }
+  }
+}

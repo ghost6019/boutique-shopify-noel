@@ -1,0 +1,45 @@
+{%- comment -%}
+  Panier latéral. Piloté par assets/theme.js (CartDrawer).
+  Ouverture : tout élément [data-cart-open]. Fermeture : [data-cart-close] ou Échap.
+{%- endcomment -%}
+<div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-label="Panier">
+  <div class="cart-drawer__overlay" data-cart-close></div>
+  <aside class="cart-drawer__panel">
+    <header class="cart-drawer__header" style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+      <h2 class="cart-drawer__title">Votre panier</h2>
+      <button type="button" class="icon-btn" data-cart-close aria-label="Fermer le panier">
+        {% render 'icon', name: 'close', size: 20 %}
+      </button>
+    </header>
+
+    <div class="cart-drawer__body" id="CartDrawerBody">
+      {%- if cart.item_count == 0 -%}
+        <div class="cart-empty"><p>{{ settings.cart_empty_message | default: 'Votre panier est vide.' }}</p></div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="cart-line" data-key="{{ item.key }}">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 144 }}" alt="{{ item.image.alt | escape }}" width="72" height="72" loading="lazy">
+            {%- else -%}
+              <div></div>
+            {%- endif -%}
+            <div>
+              <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+              <div class="cart-line__meta">{{ item.final_line_price | money }} · x{{ item.quantity }}</div>
+            </div>
+            <span></span>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <footer class="cart-drawer__footer">
+      <div class="cart-subtotal">
+        <span>Sous-total</span>
+        <span id="CartDrawerSubtotal">{{ cart.total_price | money }}</span>
+      </div>
+      <a class="btn btn--full" href="/checkout">Commander</a>
+      <p class="cart-note">Taxes incluses. Frais de livraison calculés à l'étape suivante.</p>
+    </footer>
+  </aside>
+</div>

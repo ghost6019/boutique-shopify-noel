@@ -1,0 +1,85 @@
+<section class="section" id="avis" style="background:rgba(14,20,18,.035)">
+  <div class="page-width">
+    {% render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      subtitle: section.settings.subtitle,
+      center: true,
+      wide: true,
+      index: '07'
+    %}
+
+    <div class="reviews">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div {{ block.shopify_attributes }}>{% render block %}</div>
+          {%- when 'placeholder' -%}
+            <div class="review-slot" data-animate {{ block.shopify_attributes }}>
+              <div>
+                <div class="review-slot__stars" aria-hidden="true">★★★★★</div>
+                <p class="review-slot__hint">{{ block.settings.hint | default: 'Emplacement réservé à un vrai avis client.' }}</p>
+              </div>
+              <p class="review-slot__hint" style="font-size:.78rem;opacity:.8">{{ block.settings.caption | default: 'À remplacer dès les premiers retours réels' }}</p>
+            </div>
+          {%- when 'review' -%}
+            {%- if block.settings.text != blank -%}
+              <article class="review-slot" data-animate {{ block.shopify_attributes }} style="border-style:solid">
+                <div>
+                  <div class="review-slot__stars" aria-label="{{ block.settings.rating }} sur 5">
+                    {%- for i in (1..5) -%}{%- if i <= block.settings.rating -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
+                  </div>
+                  <p style="margin:0;color:var(--ink)">« {{ block.settings.text }} »</p>
+                </div>
+                {%- if block.settings.author != blank -%}
+                  <p style="margin:0;font-weight:700;font-size:.85rem;font-family:var(--font-display)">{{ block.settings.author }}</p>
+                {%- endif -%}
+              </article>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Avis" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ce que diront vos clients." },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Aucun avis inventé. Connectez une app d’avis ou ajoutez de vrais retours." },
+    { "type": "paragraph", "content": "N’ajoutez que de vrais avis. Utilisez les emplacements tant que vous n’en avez pas." }
+  ],
+  "blocks": [
+    {
+      "type": "placeholder",
+      "name": "Emplacement",
+      "settings": [
+        { "type": "text", "id": "hint", "label": "Texte", "default": "Emplacement réservé à un vrai avis client." },
+        { "type": "text", "id": "caption", "label": "Légende", "default": "À remplacer dès les premiers retours réels" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Avis réel",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Note", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Avis" },
+        { "type": "text", "id": "author", "label": "Auteur" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Avis clients",
+      "blocks": [
+        { "type": "placeholder" },
+        { "type": "placeholder" },
+        { "type": "placeholder" }
+      ]
+    }
+  ]
+}
+{% endschema %}

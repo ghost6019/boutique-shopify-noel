@@ -1,0 +1,143 @@
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+-%}
+
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="footer-grid">
+      <div class="footer-col footer-col--brand">
+        <p class="footer-brand">{{ brand }}</p>
+        {%- if section.settings.text != blank -%}
+          <p class="footer-text">{{ section.settings.text }}</p>
+        {%- endif -%}
+
+        {%- liquid
+          assign has_social = false
+          if settings.social_instagram != blank or settings.social_tiktok != blank or settings.social_facebook != blank or settings.social_pinterest != blank or settings.social_youtube != blank
+            assign has_social = true
+          endif
+        -%}
+        {%- if section.settings.show_social and has_social -%}
+          <div class="socials">
+            {%- if settings.social_instagram != blank -%}
+              <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', name: 'instagram', size: 18 %}</a>
+            {%- endif -%}
+            {%- if settings.social_tiktok != blank -%}
+              <a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'icon', name: 'tiktok', size: 18 %}</a>
+            {%- endif -%}
+            {%- if settings.social_facebook != blank -%}
+              <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">{% render 'icon', name: 'facebook', size: 18 %}</a>
+            {%- endif -%}
+            {%- if settings.social_pinterest != blank -%}
+              <a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'icon', name: 'pinterest', size: 18 %}</a>
+            {%- endif -%}
+            {%- if settings.social_youtube != blank -%}
+              <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">{% render 'icon', name: 'youtube', size: 18 %}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu' -%}
+          <nav class="footer-col" aria-label="{{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+            {%- if block.settings.menu != blank -%}
+              {%- for link in block.settings.menu.links -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            {%- endif -%}
+          </nav>
+        {%- elsif block.type == 'legal' -%}
+          <nav class="footer-col" aria-label="{{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+            {%- for policy in shop.policies -%}
+              <a href="{{ policy.url }}">{{ policy.title }}</a>
+            {%- endfor -%}
+          </nav>
+        {%- elsif block.type == 'contact' -%}
+          <div class="footer-col" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+            {%- if block.settings.email != blank -%}
+              <a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="footer-text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ brand }}. Tous droits réservés.</span>
+      {%- if section.settings.show_payment and shop.enabled_payment_types.size > 0 -%}
+        <ul class="footer-payments" role="list" aria-label="Moyens de paiement acceptés">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'footer-payments__icon' }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .footer-payments{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+  .footer-payments__icon{width:38px;height:24px}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte de présentation",
+      "default": "Des lumières qui transforment votre maison en conte de Noël. Pensé avec soin, livré avec le sourire."
+    },
+    { "type": "checkbox", "id": "show_social", "label": "Afficher les réseaux sociaux", "info": "Les liens se configurent dans Paramètres du thème > Réseaux sociaux.", "default": true },
+    { "type": "checkbox", "id": "show_payment", "label": "Afficher les moyens de paiement", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Navigation" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "legal",
+      "name": "Informations légales",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Informations" }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Contact" },
+        { "type": "text", "id": "email", "label": "Adresse e-mail" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Une question ? Notre équipe vous répond sous 24 h ouvrées." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pied de page",
+      "blocks": [
+        { "type": "menu" },
+        { "type": "legal" },
+        { "type": "contact" }
+      ]
+    }
+  ]
+}
+{% endschema %}

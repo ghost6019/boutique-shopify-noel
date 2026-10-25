@@ -1,0 +1,69 @@
+<section class="section section--night" id="comment-ca-marche">
+  <div class="page-width">
+    {% render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      subtitle: section.settings.subtitle,
+      center: true,
+      index: '03'
+    %}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="steps">
+        {%- for block in section.blocks -%}
+          <article class="step" data-animate {{ block.shopify_attributes }}>
+            <span class="step__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <h3 class="step__title">{{ block.settings.title }}</h3>
+            <p class="step__text">{{ block.settings.text }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="how__cta btn-group">
+        <a class="btn btn--light" href="{{ section.settings.cta_link | default: '#offre' }}">{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .section--night .section__title{color:var(--parchment)}
+  .section--night .step__title{color:var(--parchment)}
+  .how__cta{justify-content:center;margin-top:2.5rem}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Comment ça marche",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Comment ça marche" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Trois étapes, zéro prise de tête" },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "De la boîte à la féerie, il suffit de quelques minutes." },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Je veux le mien !" },
+    { "type": "text", "id": "cta_link", "label": "Lien du bouton", "default": "#offre" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Placez" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Posez le projecteur face au mur ou au sapin à illuminer." }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Comment ça marche",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Placez", "text": "Posez le projecteur face au mur ou au sapin à illuminer." } },
+        { "type": "step", "settings": { "title": "Branchez", "text": "Raccordez-le en USB et allumez." } },
+        { "type": "step", "settings": { "title": "Admirez", "text": "Profitez d'une ambiance de Noël qui émerveille toute la famille." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

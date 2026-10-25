@@ -1,0 +1,22 @@
+{%- comment -%}
+  Carte produit (collections, recherche).
+  Paramètres : product (obligatoire)
+{%- endcomment -%}
+<article class="product-card" data-animate>
+  <a class="product-card__media media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    {%- if product.featured_image != blank -%}
+      {% render 'image', image: product.featured_image, sizes: '(min-width: 990px) 25vw, 50vw', widths: '360,540,720,900' %}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <div class="product-card__body">
+    <h3 class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="price">
+      <span class="price__regular product-card__price">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <s class="price__compare">{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

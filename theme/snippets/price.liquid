@@ -1,0 +1,33 @@
+{%- comment -%}
+  Affichage du prix. Le prix barré n'apparaît que si le produit possède réellement un "prix comparé" supérieur au prix de vente.
+  Paramètres :
+    - product : objet produit (obligatoire)
+    - variant : variante (optionnel, sinon prix du produit)
+    - class   : classes additionnelles
+{%- endcomment -%}
+{%- liquid
+  if variant
+    assign current_price = variant.price
+    assign compare_price = variant.compare_at_price
+    assign show_from = false
+  else
+    assign current_price = product.price
+    assign compare_price = product.compare_at_price
+    assign show_from = product.price_varies
+  endif
+  assign on_sale = false
+  if compare_price > current_price
+    assign on_sale = true
+  endif
+-%}
+<div class="nf-price{% if on_sale %} nf-price--sale{% endif %}{% if class != blank %} {{ class }}{% endif %}">
+  {%- if show_from -%}
+    <span class="nf-price__from">{{ 'products.product.price_from' | t }}</span>
+  {%- endif -%}
+  <span class="nf-price__current" data-price-current>{{ current_price | money }}</span>
+  {%- if on_sale -%}
+    <s class="nf-price__compare" data-price-compare>{{ compare_price | money }}</s>
+  {%- else -%}
+    <s class="nf-price__compare" data-price-compare hidden></s>
+  {%- endif -%}
+</div>

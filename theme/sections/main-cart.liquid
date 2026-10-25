@@ -1,0 +1,76 @@
+{{ 'sections.css' | asset_url | stylesheet_tag }}
+
+<section class="cart-page">
+  <div class="page-width">
+    <h1 class="section__title section__title--wide">{{ section.settings.title }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-page__empty">
+        <p>{{ settings.cart_empty_message | default: 'Votre panier est vide.' }}</p>
+        <a class="btn" href="{{ routes.root_url }}">Continuer mes achats</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" id="CartPageForm" class="cart-form">
+        <div class="cart-form__lines">
+          {%- for item in cart.items -%}
+            <div class="cart-line cart-line--page">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 240 }}" alt="{{ item.image.alt | escape }}" width="96" height="96" loading="lazy">
+              {%- else -%}
+                <div></div>
+              {%- endif -%}
+              <div>
+                <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div class="cart-line__meta">{{ item.variant.title }}</div>
+                {%- endunless -%}
+                <div class="cart-line__meta">{{ item.final_price | money }}</div>
+                <div class="qty cart-line__qty">
+                  <label class="visually-hidden" for="Qty-{{ item.index }}">Quantité</label>
+                  <input class="qty__input" id="Qty-{{ item.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                </div>
+              </div>
+              <div class="cart-line__side">
+                <strong>{{ item.final_line_price | money }}</strong>
+                <a href="{{ item.url_to_remove }}" class="cart-line__remove">Retirer</a>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="cart-form__summary">
+          <div class="cart-subtotal">
+            <span>Sous-total</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="cart-note">Taxes incluses. Frais de livraison calculés à l'étape suivante.</p>
+          <div class="cart-form__actions">
+            <button type="submit" name="update" class="btn btn--ghost btn--full">Mettre à jour</button>
+            <button type="submit" name="checkout" class="btn btn--full">Commander</button>
+          </div>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .cart-form{display:grid;gap:2rem;margin-top:2rem}
+  .cart-line--page{grid-template-columns:96px 1fr auto}
+  .cart-line--page img{width:96px;height:96px}
+  .cart-line__side{display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;font-family:var(--font-display)}
+  .cart-line__remove{font-size:.82rem;color:var(--mist-ink,#6b5e55)}
+  .cart-line__qty{margin-top:.6rem}
+  .cart-form__actions{display:grid;gap:.6rem}
+  .cart-form__summary{padding:1.4rem;border-radius:22px;background:rgba(255,255,255,.5);border:1px solid rgba(26,20,16,.07);align-self:start}
+  @media(min-width:900px){.cart-form{grid-template-columns:1.6fr 1fr}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page panier",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Votre panier" }
+  ]
+}
+{% endschema %}

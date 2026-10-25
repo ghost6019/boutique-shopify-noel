@@ -1,0 +1,8 @@
+{%- comment -%}
+  Point d'entrée des balises <head> utilisé par layout/theme.liquid.
+  Délègue aux balises SEO et ajoute le favicon.
+{%- endcomment -%}
+{%- if settings.favicon != blank -%}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+{%- endif -%}
+{% render 'seo-meta-tags' %}

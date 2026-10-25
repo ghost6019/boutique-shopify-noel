@@ -1,0 +1,23 @@
+{{ 'sections.css' | asset_url | stylesheet_tag }}
+
+<section class="page-main">
+  <div class="page-width page-width--narrow not-found">
+    <span class="section__eyebrow">Erreur 404</span>
+    <h1 class="section__title section__title--wide">{{ section.settings.title }}</h1>
+    <p class="section__subtitle">{{ section.settings.text }}</p>
+    <div class="btn-group not-found__actions">
+      <a class="btn" href="{{ routes.root_url }}">{{ section.settings.button_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page introuvable",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Cette page s'est envolée avec le Père Noël" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "La page que vous cherchez n'existe pas ou a été déplacée." },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Retour à l'accueil" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+{% style %}
+  :root {
+    --ink: {{ settings.color_text | default: '#0E1412' }};
+    --parchment: {{ settings.color_background | default: '#EEF1EF' }};
+    --ember: {{ settings.color_accent | default: '#C45C26' }};
+    --ember-deep: {{ settings.color_accent_hover | default: '#9A4519' }};
+    --candle: {{ settings.color_gold | default: '#E8C56A' }};
+    --mist: {{ settings.color_border | default: '#8A9590' }};
+    --mist-ink: {{ settings.color_text_muted | default: '#5A6560' }};
+    --void: #0E1412;
+    --pine: #1A2E28;
+    --frost: rgba(232, 197, 106, 0.14);
+    --color-button: {{ settings.color_button | default: '#C45C26' }};
+    --color-button-text: {{ settings.color_button_text | default: '#FFFFFF' }};
+    --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --font-body: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+    --page-width: {{ settings.page_width | default: 1180 }}px;
+    --section-space: {{ settings.section_spacing | default: 112 }}px;
+    --type-scale: {{ settings.type_scale | default: 100 | divided_by: 100.0 }};
+    --header-height: 72px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (min-width: 750px) {
+    :root { --header-height: 80px; }
+  }
+{% endstyle %}

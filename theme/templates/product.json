@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "perk_1": { "type": "perk", "settings": { "text": "Livraison rapide" } },
+        "perk_2": { "type": "perk", "settings": { "text": "Retours simples" } },
+        "perk_3": { "type": "perk", "settings": { "text": "Paiement sécurisé" } }
+      },
+      "block_order": ["perk_1", "perk_2", "perk_3"],
+      "settings": {
+        "button_label": "Je veux le mien !",
+        "payment_note": "Paiement sécurisé · Expédition suivie"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q_1": { "type": "question", "settings": { "question": "Comment fonctionne le projecteur ?", "answer": "<p>Le projecteur diffuse une lumière festive destinée à créer une ambiance de Noël dans votre intérieur.</p>" } },
+        "q_2": { "type": "question", "settings": { "question": "Puis-je retourner le produit s'il ne me convient pas ?", "answer": "<p>Oui, vous bénéficiez de notre garantie satisfait ou remboursé. Contactez-nous et nous vous guiderons pour le retour.</p>" } },
+        "q_3": { "type": "question", "settings": { "question": "Quels sont les délais de livraison ?", "answer": "<p>Les commandes sont expédiées rapidement afin d'arriver à temps pour les fêtes. Vous recevez un e-mail de suivi dès l'expédition.</p>" } }
+      },
+      "block_order": ["q_1", "q_2", "q_3"],
+      "settings": {
+        "eyebrow": "Questions fréquentes",
+        "title": "Vous vous demandez…",
+        "subtitle": "Les réponses aux questions les plus posées."
+      }
+    }
+  },
+  "order": ["main", "faq"]
+}

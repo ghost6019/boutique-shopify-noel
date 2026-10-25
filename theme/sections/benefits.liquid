@@ -1,0 +1,77 @@
+<section class="section" id="avantages">
+  <div class="page-width">
+    {% render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      subtitle: section.settings.subtitle,
+      center: true,
+      wide: true,
+      index: '05'
+    %}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="benefits">
+        {%- for block in section.blocks -%}
+          <article class="benefit" data-animate {{ block.shopify_attributes }}>
+            <span class="benefit__icon">{% render 'icon', name: block.settings.icon, size: 22 %}</span>
+            <h3 class="benefit__title">{{ block.settings.title }}</h3>
+            <p class="benefit__text">{{ block.settings.text }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avantages",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Pourquoi l'adorer" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Tout pour un Noël qui brille" },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Pensé pour vous simplifier la vie et émerveiller les vôtres." }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Avantage",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "sparkle", "label": "Étincelle" },
+            { "value": "check", "label": "Coche" },
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "heart", "label": "Cœur" },
+            { "value": "shield", "label": "Bouclier" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "truck", "label": "Livraison" },
+            { "value": "return", "label": "Retour" },
+            { "value": "lock", "label": "Cadenas" },
+            { "value": "message", "label": "Message" }
+          ],
+          "default": "sparkle"
+        },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Ambiance féerique" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Des lumières douces et festives qui transforment n'importe quel mur." }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "presets": [
+    {
+      "name": "Avantages",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "sparkle", "title": "Ambiance féerique", "text": "Des lumières douces et festives qui transforment n'importe quel mur." } },
+        { "type": "benefit", "settings": { "icon": "check", "title": "Installation simple", "text": "Posez, branchez, c'est prêt. Aucun outil nécessaire." } },
+        { "type": "benefit", "settings": { "icon": "heart", "title": "Pour toute la famille", "text": "Les enfants adorent, les grands aussi." } },
+        { "type": "benefit", "settings": { "icon": "gift", "title": "Le cadeau idéal", "text": "Un présent original qui fait son effet dès le déballage." } },
+        { "type": "benefit", "settings": { "icon": "shield", "title": "Qualité durable", "text": "Conçu pour vous accompagner à chaque Noël." } },
+        { "type": "benefit", "settings": { "icon": "message", "title": "Service client réactif", "text": "Une équipe française à votre écoute en cas de question." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

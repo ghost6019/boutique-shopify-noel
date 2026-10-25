@@ -1,0 +1,93 @@
+{%- liquid
+  assign video_embed = ''
+  if section.settings.video_url != blank
+    if section.settings.video_url.type == 'youtube'
+      assign video_embed = 'https://www.youtube.com/embed/' | append: section.settings.video_url.id | append: '?rel=0&playsinline=1'
+    elsif section.settings.video_url.type == 'vimeo'
+      assign video_embed = 'https://player.vimeo.com/video/' | append: section.settings.video_url.id | append: '?title=0&byline=0'
+    endif
+  endif
+  assign has_video = false
+  if section.settings.video != blank or video_embed != blank
+    assign has_video = true
+  endif
+-%}
+
+<section class="section" id="video">
+  <div class="page-width">
+    <div class="video-layout">
+      <div class="video-copy" data-animate>
+        {% render 'section-header',
+          eyebrow: section.settings.eyebrow,
+          title: section.settings.title,
+          subtitle: section.settings.subtitle,
+          index: '04'
+        %}
+        {%- if section.settings.cta_label != blank -%}
+          <a class="btn" href="{{ section.settings.cta_link | default: '#offre' }}">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+      </div>
+
+      <div class="video-block" data-video-block data-animate="scale">
+        {%- if section.settings.video != blank -%}
+          {{- section.settings.video | video_tag: controls: false, autoplay: false, loop: false, muted: false, playsinline: true, preload: 'metadata', image_size: '1100x' -}}
+        {%- elsif video_embed != blank -%}
+          <iframe
+            data-src="{{ video_embed }}"
+            title="{{ section.settings.title | escape }}"
+            loading="lazy"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        {%- endif -%}
+
+        {%- if section.settings.poster != blank -%}
+          <div data-video-poster class="video-block__poster-wrap">
+            {% render 'image', image: section.settings.poster, class: 'video-block__poster', sizes: '(min-width: 900px) 50vw, 100vw' %}
+          </div>
+        {%- elsif has_video == false -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+
+        {%- if has_video -%}
+          <button type="button" class="video-block__play" data-video-play aria-label="Lire la vidéo">
+            <span class="video-block__play-icon">{% render 'icon', name: 'play', size: 28 %}</span>
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  [data-video-play][hidden],[data-video-poster][hidden]{display:none!important}
+  .video-block__poster-wrap{position:absolute;inset:0}
+  .video-block .placeholder-svg{position:absolute;inset:0;height:100%}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Vidéo",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "En situation" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Voyez la magie en mouvement" },
+    { "type": "textarea", "id": "subtitle", "label": "Texte", "default": "Quelques secondes suffisent pour comprendre pourquoi nos clients l'adorent." },
+    { "type": "header", "content": "Vidéo" },
+    { "type": "video", "id": "video", "label": "Vidéo hébergée sur Shopify" },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Ou lien YouTube / Vimeo",
+      "accept": ["youtube", "vimeo"],
+      "info": "Ignoré si une vidéo Shopify est sélectionnée."
+    },
+    { "type": "image_picker", "id": "poster", "label": "Image de couverture (optionnel)" },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Je veux le mien !" },
+    { "type": "text", "id": "cta_link", "label": "Lien du bouton", "default": "#offre" }
+  ],
+  "presets": [
+    { "name": "Vidéo" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,88 @@
+<section class="section" id="avant-apres">
+  <div class="page-width">
+    {% render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      subtitle: section.settings.copy,
+      center: true,
+      wide: true,
+      index: '01'
+    %}
+
+    <div class="ba" data-animate="scale">
+      {%- comment -%}
+        Sens correct : À GAUCHE = Avant, À DROITE = Après.
+        Base = après (plein cadre). Calque = avant, découpé à gauche via --ba-pos.
+      {%- endcomment -%}
+      <div
+        class="ba__slider"
+        data-ba-slider
+        style="--ba-pos: 50%"
+      >
+        <div class="ba__layer ba__layer--after">
+          {%- if section.settings.after_image != blank -%}
+            {% render 'image', image: section.settings.after_image, sizes: '(min-width: 1180px) 1180px, 100vw', alt: section.settings.after_label %}
+          {%- else -%}
+            {{ 'hero-ambiance.jpg' | asset_url | image_tag: loading: 'lazy', alt: section.settings.after_label }}
+          {%- endif -%}
+        </div>
+
+        <div class="ba__layer ba__layer--before" data-ba-before>
+          {%- if section.settings.before_image != blank -%}
+            {% render 'image', image: section.settings.before_image, sizes: '(min-width: 1180px) 1180px, 100vw', alt: section.settings.before_label %}
+          {%- else -%}
+            {{ 'before-after.jpg' | asset_url | image_tag: loading: 'lazy', alt: section.settings.before_label }}
+          {%- endif -%}
+        </div>
+
+        <div class="ba__handle" data-ba-handle aria-hidden="true">
+          <span class="ba__handle-btn">
+            <span class="ba__handle-arrows" aria-hidden="true">
+              <svg width="10" height="14" viewBox="0 0 10 14" fill="none"><path d="M8 1L2 7l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="10" height="14" viewBox="0 0 10 14" fill="none"><path d="M2 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </span>
+        </div>
+
+        <input
+          class="ba__range"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          step="0.1"
+          data-ba-range
+          aria-label="Comparer avant et après"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="50"
+        >
+
+        <span class="ba__label ba__label--before">{{ section.settings.before_label }}</span>
+        <span class="ba__label ba__label--after">{{ section.settings.after_label }}</span>
+      </div>
+
+      {%- if section.settings.hint != blank -%}
+        <p class="ba__hint">{{ section.settings.hint }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avant / Après",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "La différence" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Même pièce. Autre monde." },
+    { "type": "textarea", "id": "copy", "label": "Texte", "default": "Faites glisser pour voir comment une seule lumière change toute l’ambiance." },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "before_image", "label": "Image « Avant »", "info": "Pièce sans le projecteur." },
+    { "type": "image_picker", "id": "after_image", "label": "Image « Après »", "info": "Même cadrage, avec la lumière." },
+    { "type": "text", "id": "before_label", "label": "Étiquette « Avant »", "default": "Avant" },
+    { "type": "text", "id": "after_label", "label": "Étiquette « Après »", "default": "Après" },
+    { "type": "text", "id": "hint", "label": "Indication sous le curseur", "default": "← Glissez pour comparer →" }
+  ],
+  "presets": [{ "name": "Avant / Après" }]
+}
+{% endschema %}

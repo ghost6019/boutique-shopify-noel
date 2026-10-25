@@ -1,0 +1,76 @@
+<section class="nf-section nf-account nf-scheme--{{ section.settings.scheme }}" style="--pt: 48; --pb: 96;">
+  <div class="nf-container">
+    <header class="nf-account__head">
+      <h1 class="nf-section__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      <a href="{{ routes.account_url }}" class="nf-btn nf-btn--ghost">{{ 'customer.order.back' | t }}</a>
+    </header>
+
+    <p class="nf-toolbar__count">{{ order.created_at | time_tag: format: 'date' }}</p>
+
+    <div class="nf-table-wrap">
+      <table class="nf-table">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'customer.order.product' | t }}</th>
+            <th scope="col">{{ 'cart.general.quantity' | t }}</th>
+            <th scope="col">{{ 'customer.orders.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td>
+                {{ line_item.title }}
+                {%- if line_item.fulfillment != blank -%}
+                  {%- assign shipped_date = line_item.fulfillment.created_at | date: '%d/%m/%Y' -%}
+                  <br><small>{{ 'customer.order.shipped_on' | t: date: shipped_date }}</small>
+                  {%- if line_item.fulfillment.tracking_url != blank -%}
+                    <br><a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" rel="noopener noreferrer">{{ 'customer.order.track' | t }}</a>
+                  {%- endif -%}
+                {%- endif -%}
+              </td>
+              <td>{{ line_item.quantity }}</td>
+              <td>{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><th scope="row" colspan="2">{{ 'cart.general.subtotal' | t }}</th><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+          {%- for shipping_method in order.shipping_methods -%}
+            <tr><th scope="row" colspan="2">{{ shipping_method.title }}</th><td>{{ shipping_method.price | money }}</td></tr>
+          {%- endfor -%}
+          <tr><th scope="row" colspan="2">{{ 'customer.orders.total' | t }}</th><td>{{ order.total_price | money }}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="nf-account__grid">
+      <div>
+        <h2 class="nf-account__subtitle">{{ 'customer.order.shipping_address' | t }}</h2>
+        <address>{{ order.shipping_address | format_address }}</address>
+      </div>
+      <div>
+        <h2 class="nf-account__subtitle">{{ 'customer.order.billing_address' | t }}</h2>
+        <address>{{ order.billing_address | format_address }}</address>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Commande",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Palette",
+      "options": [
+        { "value": "dark", "label": "Nuit" },
+        { "value": "light", "label": "Parchemin" }
+      ],
+      "default": "light"
+    }
+  ]
+}
+{% endschema %}

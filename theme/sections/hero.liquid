@@ -1,0 +1,145 @@
+<section class="hero{% if section.settings.layout == 'center' %} hero--visual{% endif %}" id="accueil">
+  <div class="hero__media">
+    {%- if section.settings.image != blank -%}
+      {% render 'image', image: section.settings.image, sizes: '100vw', loading: 'eager', fetchpriority: 'high', widths: '750,1100,1500,1800,2400' %}
+    {%- else -%}
+      {{ 'hero-ambiance.jpg' | asset_url | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.title, sizes: '100vw' }}
+    {%- endif -%}
+    {%- if section.settings.video != blank -%}
+      {{- section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '1600x' -}}
+    {%- endif -%}
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="hero__rays" aria-hidden="true"></div>
+
+  {%- if section.settings.show_brandmark -%}
+    <p class="hero__brandmark" aria-hidden="true">{{ settings.brand_name | default: 'NOM DE MARQUE' }}</p>
+  {%- endif -%}
+
+  {%- if section.settings.show_orbs -%}
+    <div class="hero__orbs" aria-hidden="true">
+      <span class="hero__orb hero__orb--1"></span>
+      <span class="hero__orb hero__orb--2"></span>
+      <span class="hero__orb hero__orb--3"></span>
+    </div>
+  {%- endif -%}
+
+  <div class="page-width">
+    <div class="hero__content" data-animate>
+      <span class="hero__brand">{{ settings.brand_name | default: 'NOM DE MARQUE' }}</span>
+
+      {%- if section.settings.kicker != blank -%}
+        <span class="hero__kicker"><span class="hero__kicker-dot"></span>{{ section.settings.kicker }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank or section.settings.title_accent != blank -%}
+        <h1 class="hero__title">
+          {%- if section.settings.title != blank -%}{{ section.settings.title }}{%- endif -%}
+          {%- if section.settings.title_accent != blank -%}
+            <em>{{ section.settings.title_accent }}</em>
+          {%- endif -%}
+        </h1>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_label != blank -%}
+        <div class="hero__cta btn-group">
+          <a class="btn btn--light btn--hero" href="{{ section.settings.cta_link | default: '#offre' }}">{{ section.settings.cta_label }}</a>
+          {%- if section.settings.secondary_label != blank -%}
+            <a class="btn btn--ghost" href="{{ section.settings.secondary_link | default: '#produit' }}" style="color:#fff;border-color:rgba(255,255,255,.35);">{{ section.settings.secondary_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="trust-row">
+          {%- for block in section.blocks -%}
+            <li class="trust-item" {{ block.shopify_attributes }}>
+              {% render 'icon', name: block.settings.icon, size: 16 %}
+              <span>{{ block.settings.text }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero__media video,.hero__media .placeholder-svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero__media .placeholder-svg{min-height:100%}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Héros",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Média" },
+    { "type": "image_picker", "id": "image", "label": "Image de fond", "info": "Format paysage conseillé : 2400 x 1400 px." },
+    { "type": "video", "id": "video", "label": "Vidéo de fond (optionnel)", "info": "Lue en boucle, sans son, au-dessus de l'image." },
+    { "type": "header", "content": "Contenu" },
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "Édition Noël" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Une pièce. Une lumière." },
+    { "type": "text", "id": "title_accent", "label": "Titre — ligne en italique", "default": "Une autre histoire." },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Le projecteur LED portable qui transforme votre intérieur en ambiance festive — branché en USB, prêt en quelques secondes." },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton principal", "default": "Je veux le mien !" },
+    { "type": "text", "id": "cta_link", "label": "Lien du bouton principal", "default": "#offre" },
+    { "type": "text", "id": "secondary_label", "label": "Texte du bouton secondaire (optionnel)" },
+    { "type": "text", "id": "secondary_link", "label": "Lien du bouton secondaire", "default": "#produit" },
+    { "type": "header", "content": "Présentation" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Alignement du contenu",
+      "options": [
+        { "value": "left", "label": "À gauche" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "left"
+    },
+    { "type": "checkbox", "id": "show_orbs", "label": "Afficher les halos lumineux animés", "default": true },
+    { "type": "checkbox", "id": "show_brandmark", "label": "Afficher le filigrane de marque", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Garantie",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "truck", "label": "Livraison" },
+            { "value": "return", "label": "Retour" },
+            { "value": "shield", "label": "Bouclier" },
+            { "value": "lock", "label": "Cadenas" },
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "heart", "label": "Cœur" },
+            { "value": "check", "label": "Coche" },
+            { "value": "sparkle", "label": "Étincelle" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Livraison soignée" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Héros",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "truck", "text": "Livraison soignée" } },
+        { "type": "trust", "settings": { "icon": "shield", "text": "Paiement sécurisé" } },
+        { "type": "trust", "settings": { "icon": "sparkle", "text": "Effet immédiat" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

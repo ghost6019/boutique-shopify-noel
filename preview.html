@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr" class="js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Aperçu — Velvet Night</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme/assets/base.css">
+  <style>
+    :root{
+      --ink:#0E1412;--parchment:#EEF1EF;--ember:#C45C26;--ember-deep:#9A4519;
+      --candle:#E8C56A;--mist:#8A9590;--mist-ink:#5A6560;--void:#0E1412;--pine:#1A2E28;
+      --font-display:"Fraunces",Georgia,serif;--font-body:"Sora",sans-serif;
+      --page-width:1180px;--section-space:112px;--type-scale:1;
+      --header-height:72px;--radius-sm:8px;--radius-md:14px;--radius-lg:22px;
+      --ease:cubic-bezier(0.22,1,0.36,1);
+    }
+    .preview-banner{
+      position:sticky;top:0;z-index:400;background:#0E1412;color:#EEF1EF;
+      text-align:center;font-size:.74rem;padding:.6rem 1rem;letter-spacing:.08em;text-transform:uppercase;
+    }
+    .preview-banner strong{color:#E8C56A;font-family:var(--font-display);font-style:italic;text-transform:none;letter-spacing:0;font-size:1rem}
+    [data-animate]{opacity:1!important;transform:none!important}
+  </style>
+</head>
+<body>
+  <div class="preview-banner">Direction <strong>Velvet Night</strong> · aperçu local · marque : NOM DE MARQUE</div>
+
+  <div class="announcement announcement--marquee">
+    <div class="announcement__track">
+      <span class="announcement__item">Projecteur LED · ambiance de Noël</span>
+      <span class="announcement__item">Paiement sécurisé</span>
+      <span class="announcement__item">Retours simples</span>
+      <span class="announcement__item">Projecteur LED · ambiance de Noël</span>
+      <span class="announcement__item">Paiement sécurisé</span>
+      <span class="announcement__item">Retours simples</span>
+      <span class="announcement__item">Projecteur LED · ambiance de Noël</span>
+      <span class="announcement__item">Paiement sécurisé</span>
+    </div>
+  </div>
+
+  <header class="site-header is-scrolled" data-site-header>
+    <div class="page-width site-header__inner">
+      <span class="icon-btn menu-toggle">☰</span>
+      <a class="brand" href="#">NOM DE MARQUE</a>
+      <nav class="nav-desktop">
+        <a href="#accueil">Accueil</a>
+        <a href="#produit">Notre projecteur</a>
+        <a href="#comment-ca-marche">Comment ça marche</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn header-cta" href="#offre">Je veux le mien !</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--visual" id="accueil">
+      <div class="hero__media"><img src="theme/assets/hero-ambiance.jpg" alt=""></div>
+      <div class="hero__overlay"></div>
+      <div class="hero__rays" aria-hidden="true"></div>
+      <p class="hero__brandmark" aria-hidden="true">NOM DE MARQUE</p>
+      <div class="hero__orbs" aria-hidden="true">
+        <span class="hero__orb hero__orb--1"></span>
+        <span class="hero__orb hero__orb--2"></span>
+        <span class="hero__orb hero__orb--3"></span>
+      </div>
+      <div class="page-width">
+        <div class="hero__content">
+          <span class="hero__brand">NOM DE MARQUE</span>
+          <span class="hero__kicker"><span class="hero__kicker-dot"></span> Lumière de Noël</span>
+          <h1 class="hero__title">Une pièce. Une lumière.<em>Une autre histoire.</em></h1>
+          <p class="hero__subtitle">Le projecteur LED portable qui transforme votre intérieur en ambiance festive — branché en USB, prêt en quelques secondes.</p>
+          <div class="hero__cta btn-group">
+            <a class="btn btn--light btn--hero" href="#offre">Je veux le mien !</a>
+          </div>
+          <ul class="trust-row" style="justify-content:center">
+            <li class="trust-item">Livraison soignée</li>
+            <li class="trust-item">Paiement sécurisé</li>
+            <li class="trust-item">Effet immédiat</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-block:2.5rem">
+      <div class="page-width">
+        <div class="trust-strip">
+          <div class="trust-strip__item"><div class="trust-strip__icon">✦</div><div><p class="trust-strip__title">Livraison soignée</p><p class="trust-strip__text">Expédition suivie</p></div></div>
+          <div class="trust-strip__item"><div class="trust-strip__icon">◈</div><div><p class="trust-strip__title">Paiement sécurisé</p><p class="trust-strip__text">Checkout Shopify</p></div></div>
+          <div class="trust-strip__item"><div class="trust-strip__icon">↺</div><div><p class="trust-strip__title">Retours simples</p><p class="trust-strip__text">Politique claire</p></div></div>
+          <div class="trust-strip__item"><div class="trust-strip__icon">☀</div><div><p class="trust-strip__title">Effet immédiat</p><p class="trust-strip__text">Ambiance en quelques secondes</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="avant-apres">
+      <div class="page-width">
+        <div class="section__header section__header--center" data-index="01">
+          <span class="section__eyebrow">La différence</span>
+          <h2 class="section__title section__title--wide">Même pièce. Autre monde.</h2>
+          <p class="section__subtitle">Faites glisser pour voir comment une seule lumière change toute l’ambiance.</p>
+        </div>
+        <div class="ba__slider" data-ba-slider style="--ba-pos:50%">
+          <div class="ba__layer ba__layer--after">
+            <img src="theme/assets/hero-ambiance.jpg" alt="Après">
+          </div>
+          <div class="ba__layer ba__layer--before" data-ba-before>
+            <img src="theme/assets/before-after.jpg" alt="Avant">
+          </div>
+          <div class="ba__handle" data-ba-handle aria-hidden="true">
+            <span class="ba__handle-btn">
+              <span class="ba__handle-arrows">
+                <svg width="10" height="14" viewBox="0 0 10 14" fill="none"><path d="M8 1L2 7l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="10" height="14" viewBox="0 0 10 14" fill="none"><path d="M2 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </span>
+          </div>
+          <input class="ba__range" type="range" min="0" max="100" value="50" step="0.1" data-ba-range aria-label="Comparer avant et après">
+          <span class="ba__label ba__label--before">Avant</span>
+          <span class="ba__label ba__label--after">Après</span>
+        </div>
+        <p class="ba__hint">← Glissez pour comparer →</p>
+      </div>
+    </section>
+
+    <section class="section" id="produit">
+      <div class="page-width showcase">
+        <div class="showcase__image">
+          <img src="theme/assets/product-demo.jpg" alt="">
+          <span class="showcase__badge">Portable · USB</span>
+        </div>
+        <div>
+          <div class="section__header" data-index="02">
+            <span class="section__eyebrow">Notre projecteur</span>
+            <h2 class="section__title">Le geste qui change l’ambiance.</h2>
+          </div>
+          <p class="section__subtitle" style="margin-bottom:1.2rem">Compact, portable, alimenté en USB. Placez-le — la lumière fait le reste.</p>
+          <ul class="benefit-list">
+            <li><span>✓</span><span>Alimentation USB, mise en route rapide</span></li>
+            <li><span>✓</span><span>Ambiance festive en quelques secondes</span></li>
+            <li><span>✓</span><span>Format discret pour votre intérieur</span></li>
+          </ul>
+          <a class="btn" href="#offre">Je veux le mien !</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--night" id="comment-ca-marche">
+      <div class="page-width">
+        <div class="section__header section__header--center" data-index="03">
+          <span class="section__eyebrow">Comment ça marche</span>
+          <h2 class="section__title">Trois gestes. Zéro complexité.</h2>
+        </div>
+        <div class="steps">
+          <article class="step"><span class="step__num">01</span><h3 class="step__title">Branchez</h3><p class="step__text">Connectez simplement le projecteur en USB.</p></article>
+          <article class="step"><span class="step__num">02</span><h3 class="step__title">Placez</h3><p class="step__text">Près du sapin, dans le salon, où vous voulez.</p></article>
+          <article class="step"><span class="step__num">03</span><h3 class="step__title">Profitez</h3><p class="step__text">L’ambiance festive se crée immédiatement.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="page-width">
+        <div class="section__header section__header--center" data-index="06">
+          <span class="section__eyebrow">Dans votre intérieur</span>
+          <h2 class="section__title section__title--wide">Plusieurs moments. Une même lumière.</h2>
+        </div>
+        <div class="usages">
+          <figure class="usage"><img src="theme/assets/usage-tree.jpg" alt=""><figcaption class="usage__label">Autour du sapin</figcaption></figure>
+          <figure class="usage"><img src="theme/assets/usage-living.jpg" alt=""><figcaption class="usage__label">Salon</figcaption></figure>
+          <figure class="usage"><img src="theme/assets/usage-bedroom.jpg" alt=""><figcaption class="usage__label">Chambre</figcaption></figure>
+          <figure class="usage"><img src="theme/assets/usage-evening.jpg" alt=""><figcaption class="usage__label">Soirée</figcaption></figure>
+          <figure class="usage"><img src="theme/assets/product-demo.jpg" alt=""><figcaption class="usage__label">Le projecteur</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="offre">
+      <div class="page-width">
+        <div class="offer">
+          <div class="offer__media"><img src="theme/assets/product-demo.jpg" alt=""></div>
+          <div>
+            <span class="section__eyebrow">L’offre</span>
+            <h2 class="offer__title">Votre ambiance commence ici.</h2>
+            <div class="offer__meta">
+              <div class="price"><span class="price__regular">39,90 €</span></div>
+              <div class="trust-row">
+                <span class="trust-item">Livraison soignée</span>
+                <span class="trust-item">Paiement sécurisé</span>
+              </div>
+            </div>
+            <a class="btn btn--full" href="#">Je veux le mien !</a>
+            <p class="offer__payment-note">Paiement sécurisé · Expédition suivie</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="page-width page-width--narrow">
+        <div class="section__header section__header--center" data-index="08">
+          <span class="section__eyebrow">Questions</span>
+          <h2 class="section__title">Le nécessaire, clairement.</h2>
+        </div>
+        <div class="faq">
+          <details class="faq-item" open>
+            <summary><span>Comment l’alimenter ?</span><span class="faq-item__icon">+</span></summary>
+            <div class="faq-item__body"><p>Via une connexion USB.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Où l’utiliser ?</span><span class="faq-item__icon">+</span></summary>
+            <div class="faq-item__body"><p>En intérieur : salon, sapin, chambre, soirée de Noël.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="page-width">
+        <div class="final-cta">
+          <div class="final-cta__media"><img src="theme/assets/usage-tree.jpg" alt=""></div>
+          <div class="final-cta__overlay"></div>
+          <div class="final-cta__content">
+            <span class="final-cta__brand">NOM DE MARQUE</span>
+            <h2 class="final-cta__title">Prêt à changer l’ambiance ?</h2>
+            <p class="final-cta__text">Une lumière chaleureuse, une installation simple, une atmosphère immédiatement plus festive.</p>
+            <a class="btn btn--light" href="#offre">Je veux le mien !</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width">
+      <div class="footer-brand">NOM DE MARQUE</div>
+      <p class="footer-text">Direction artistique Velvet Night — éditorial, nocturne, loin des templates génériques.</p>
+      <div class="footer-bottom"><span>© 2026 · Aperçu local</span></div>
+    </div>
+  </footer>
+
+  <script>
+    window.themeSettings = { animations: true, cartDrawer: false, stickyAtc: false };
+    window.routes = { cartAddUrl: '/cart/add.js', cartUrl: '/cart', cartChangeUrl: '/cart/change.js' };
+  </script>
+  <script src="theme/assets/theme.js"></script>
+</body>
+</html>

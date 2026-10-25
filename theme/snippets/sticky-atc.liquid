@@ -1,0 +1,30 @@
+{%- comment -%}
+  Barre d'achat collante (mobile). Activée par settings.sticky_atc_enabled.
+  Doit être rendue DANS la section portant [data-product-root] et #offre.
+  Paramètres : product, form_id, button_label
+{%- endcomment -%}
+{%- if settings.sticky_atc_enabled and product != blank -%}
+  {%- liquid
+    assign sticky_variant = product.selected_or_first_available_variant
+    assign sticky_label = button_label | default: 'Je veux le mien !'
+  -%}
+  <div class="sticky-atc" data-sticky-atc>
+    <div class="sticky-atc__inner">
+      <div class="sticky-atc__info">
+        <p class="sticky-atc__title">{{ product.title }}</p>
+        <span class="sticky-atc__price" data-price-current>{{ sticky_variant.price | money }}</span>
+      </div>
+      <button
+        type="submit"
+        form="{{ form_id }}"
+        class="btn"
+        data-atc
+        data-label="{{ sticky_label | escape }}"
+        data-soldout-label="Épuisé"
+        {% unless sticky_variant.available %}disabled{% endunless %}
+      >
+        <span data-atc-label>{% if sticky_variant.available %}{{ sticky_label }}{% else %}Épuisé{% endif %}</span>
+      </button>
+    </div>
+  </div>
+{%- endif -%}

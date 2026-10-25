@@ -1,0 +1,126 @@
+{%- liquid
+  assign product = section.settings.product
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+  assign form_id = 'ProductForm-' | append: section.id
+  assign cta = section.settings.button_label | default: 'Je veux le mien !'
+-%}
+
+<section class="section" id="offre" data-offer-section data-product-root>
+  <div class="page-width">
+    {%- if product != blank -%}
+      {%- liquid
+        assign current_variant = product.selected_or_first_available_variant
+        assign on_sale = false
+        assign saving = 0
+        if current_variant.compare_at_price > current_variant.price
+          assign on_sale = true
+          assign saving = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price
+        endif
+        assign offer_image = section.settings.image | default: product.featured_image
+      -%}
+
+      <div class="offer" data-animate="scale">
+        <div class="offer__media">
+          {%- if offer_image != blank -%}
+            {% render 'image', image: offer_image, sizes: '(min-width: 900px) 40vw, 100vw', alt: product.title %}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        <div class="offer__content">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="section__eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="offer__title">{{ section.settings.title | default: product.title }}</h2>
+          {%- if section.settings.text != blank -%}
+            <div class="rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+
+          <div class="offer__meta">
+            <div class="price">
+              <span class="price__regular" data-price-current>{{ current_variant.price | money }}</span>
+              <s class="price__compare" data-price-compare{% unless on_sale %} hidden{% endunless %}>{% if on_sale %}{{ current_variant.compare_at_price | money }}{% endif %}</s>
+              {%- if on_sale -%}
+                <span class="price__badge">-{{ saving }} %</span>
+              {%- endif -%}
+            </div>
+
+            {%- if section.blocks.size > 0 -%}
+              <ul class="trust-row">
+                {%- for block in section.blocks -%}
+                  <li class="trust-item" {{ block.shopify_attributes }}>
+                    {% render 'icon', name: 'check', size: 16 %}
+                    <span>{{ block.settings.text }}</span>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+
+          {% render 'product-form', product: product, form_id: form_id, button_label: cta %}
+
+          {%- if section.settings.payment_note != blank -%}
+            <p class="offer__payment-note">{{ section.settings.payment_note }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="offer" data-animate>
+        <div class="offer__media">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        <div class="offer__content">
+          <h2 class="offer__title">Ajoutez votre produit</h2>
+          <p>Sélectionnez un produit dans les paramètres de cette section pour afficher l'offre.</p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Hors de .page-width pour que la barre collante ne soit pas piégée dans un contexte d'empilement {%- endcomment -%}
+  {%- if product != blank -%}
+    {% render 'sticky-atc', product: product, form_id: form_id, button_label: cta %}
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  #offre.section{z-index:auto}
+  .offer .section__eyebrow{margin-bottom:.75rem}
+  .offer .product-form__submit{flex:1;min-width:200px}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Offre",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produit", "info": "Si vide, le premier produit de la boutique est utilisé." },
+    { "type": "image_picker", "id": "image", "label": "Image personnalisée (optionnel)", "info": "Par défaut : l'image principale du produit." },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Offre de Noël" },
+    { "type": "text", "id": "title", "label": "Titre (par défaut : nom du produit)" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un projecteur LED portable pour créer une lumière festive et chaleureuse, simplement.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Je veux le mien !" },
+    { "type": "text", "id": "payment_note", "label": "Note sous le bouton", "default": "Paiement sécurisé · Expédition suivie" }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Argument",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texte", "default": "Livraison rapide" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Offre",
+      "blocks": [
+        { "type": "perk", "settings": { "text": "Livraison rapide" } },
+        { "type": "perk", "settings": { "text": "Retours simples" } },
+        { "type": "perk", "settings": { "text": "Paiement sécurisé" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
