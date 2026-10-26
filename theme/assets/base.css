@@ -779,3 +779,241 @@ body.has-sticky-atc{padding-bottom:84px}
   display:inline-block;font-family:var(--font-display);font-style:italic;font-weight:600;
   color:var(--candle);letter-spacing:0;
 }
+
+/* ==========================================================================
+   Mobile-first polish (phones ≤ 749px)
+   ========================================================================== */
+@media (max-width: 749px){
+  :root{ --header-height: 64px; }
+
+  body{
+    font-size:1rem;
+    padding-left:env(safe-area-inset-left);
+    padding-right:env(safe-area-inset-right);
+  }
+
+  .page-width,
+  .page-width--narrow{
+    width:min(100% - 1.5rem, var(--page-width,1180px));
+  }
+
+  .section{
+    padding-block:clamp(2.75rem, 12vw, 4.25rem);
+  }
+
+  .section__title{
+    font-size:clamp(1.85rem, 9.5vw, 2.55rem);
+    max-width:14ch;
+  }
+  .section__title--wide{max-width:16ch}
+  .section__subtitle{
+    font-size:1rem;
+    max-width:34ch;
+  }
+  .section__header{margin-bottom:1.5rem}
+  .section__header[data-index]::after{
+    font-size:clamp(3.5rem, 22vw, 5.5rem);
+    top:-.35em;right:0;opacity:.9;
+  }
+  .section__header--center .section__title,
+  .section__header--center .section__subtitle{max-width:18ch}
+
+  .btn{
+    min-height:52px;
+    width:100%;
+    padding:.95rem 1.25rem;
+    font-size:.95rem;
+  }
+  .btn-group{
+    width:100%;
+    flex-direction:column;
+    gap:.65rem;
+  }
+  .btn-group .btn{width:100%}
+
+  .brand{
+    font-size:1rem;
+    max-width:46vw;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* Hero — fit real phone viewport, readable type, fat CTA */
+  .hero{
+    min-height:min(100dvh, 760px);
+    min-height:min(100svh, 760px);
+  }
+  .hero__content{
+    padding:calc(var(--header-height) + 2.5rem) 0 calc(1.75rem + env(safe-area-inset-bottom));
+    max-width:none;
+  }
+  .hero--visual .hero__content{
+    padding-bottom:calc(1.75rem + env(safe-area-inset-bottom));
+  }
+  .hero__brand{font-size:1.2rem;margin-bottom:.65rem}
+  .hero__kicker{
+    font-size:.62rem;letter-spacing:.12em;
+    padding:.32rem .7rem;margin-bottom:.85rem;
+  }
+  .hero__title{
+    font-size:clamp(2.05rem, 11vw, 2.75rem);
+    margin-bottom:.75rem;
+    gap:.12em;
+  }
+  .hero__title em{font-size:.82em}
+  .hero__subtitle{
+    font-size:1rem;
+    margin-bottom:1.25rem;
+    max-width:28ch;
+    line-height:1.5;
+  }
+  .hero__cta{margin-bottom:1rem;width:100%}
+  .hero__brandmark{
+    top:36%;
+    font-size:clamp(3.2rem, 22vw, 5.5rem);
+    max-width:92vw;
+    overflow:hidden;
+  }
+  .hero__orb--1{width:140px;height:140px}
+  .hero__orb--2{width:90px;height:90px}
+  .hero__orb--3{display:none}
+  .hero__rays{opacity:.22;animation:none}
+  .hero__media img,
+  .hero__media video{animation:none;transform:scale(1.04)}
+
+  .hero .trust-row{
+    justify-content:center;
+    gap:.45rem .85rem;
+  }
+  .hero .trust-item{font-size:.78rem}
+
+  /* Trust — denser cards */
+  .trust-strip{gap:.55rem}
+  .trust-strip__item{
+    flex-direction:column;
+    gap:.45rem;
+    padding:.9rem .8rem;
+  }
+  .trust-strip__icon{width:34px;height:34px}
+  .trust-strip__title{font-size:.92rem}
+  .trust-strip__text{font-size:.78rem;line-height:1.4}
+
+  /* Before / after — taller for thumbs, bigger handle */
+  .ba__slider{
+    aspect-ratio:5/6;
+    min-height:320px;
+    border-radius:16px;
+  }
+  .ba__handle-btn{
+    width:64px;height:64px;
+  }
+  .ba__label{
+    top:.7rem;
+    padding:.35rem .65rem;
+    font-size:.62rem;
+    letter-spacing:.1em;
+  }
+  .ba__label--before{left:.7rem}
+  .ba__label--after{right:.7rem}
+  .ba__hint{font-size:.78rem;margin-top:.9rem}
+
+  /* Showcase / offer */
+  .showcase{gap:1.35rem}
+  .showcase__image img{aspect-ratio:1}
+  .showcase__image::before{inset:8%}
+  .showcase__badge{left:.75rem;bottom:.75rem;font-size:.68rem;padding:.45rem .75rem}
+
+  .offer{
+    padding:1.1rem;
+    border-radius:18px;
+    gap:1.15rem;
+  }
+  .offer::after{display:none}
+  .offer__title{font-size:clamp(1.7rem, 8vw, 2.2rem);max-width:14ch}
+  .offer__media img{border-radius:14px}
+  .product-form__row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .product-form__row .qty{width:100%;justify-content:space-between}
+  .product-form__row .btn{width:100%}
+
+  .step{padding:1.25rem 1.1rem}
+  .step__title{font-size:1.25rem}
+
+  .video-block{
+    max-width:min(100%, 320px);
+    aspect-ratio:9/16;
+  }
+  .video-block__play-icon{width:68px;height:68px}
+
+  .benefit{padding:1.15rem}
+  .benefit__title{font-size:1.1rem}
+
+  .usages{gap:.55rem}
+  .usage{min-height:140px;border-radius:14px}
+  .usage:first-child{min-height:200px}
+  .usage__label{left:.65rem;bottom:.65rem;font-size:.72rem;padding:.35rem .65rem}
+
+  .faq-item summary{
+    padding:1rem 1rem;
+    font-size:.98rem;
+    min-height:52px;
+  }
+  .faq-item__body{padding:0 1rem 1.05rem}
+
+  .final-cta{
+    min-height:360px;
+    border-radius:18px;
+  }
+  .final-cta__content{padding:1.5rem 1.15rem 1.65rem}
+  .final-cta__title{font-size:clamp(1.7rem, 8vw, 2.3rem)}
+  .final-cta__brand{font-size:1.05rem}
+
+  .site-footer{padding:2.5rem 0 calc(1.5rem + env(safe-area-inset-bottom))}
+  .footer-grid{gap:1.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.5rem}
+
+  .cart-drawer__panel{
+    width:100%;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+
+  .sticky-atc{
+    padding:.65rem .85rem calc(.65rem + env(safe-area-inset-bottom));
+  }
+  .sticky-atc__inner{gap:.65rem}
+  .sticky-atc .btn{
+    min-height:48px;
+    width:auto;
+    flex:1 1 auto;
+    max-width:58%;
+  }
+  body.has-sticky-atc{
+    padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  }
+
+  .announcement{font-size:.68rem}
+  .announcement--marquee{padding:.55rem 0}
+
+  /* Less motion = smoother scroll on mid phones */
+  .trust-strip__item:hover,
+  .benefit:hover,
+  .usage:hover img{
+    transform:none;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 379px){
+  .trust-strip{grid-template-columns:1fr}
+  .hero__title{font-size:1.9rem}
+  .ba__slider{min-height:280px;aspect-ratio:4/5}
+  .brand{max-width:42vw;font-size:.92rem}
+}
+
+/* Prefer reduced data / coarse pointers: lighter effects */
+@media (max-width: 749px) and (prefers-reduced-motion: reduce){
+  .hero__orb,.announcement__track{animation:none!important}
+}

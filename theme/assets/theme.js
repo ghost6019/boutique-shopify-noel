@@ -84,8 +84,11 @@
       }
 
       function onPointerDown(event) {
+        /* Ignore multi-touch so vertical page scroll still works */
+        if (event.touches && event.touches.length > 1) return;
         dragging = true;
         slider.classList.add('is-dragging');
+        try { slider.setPointerCapture && event.pointerId != null && slider.setPointerCapture(event.pointerId); } catch (e) {}
         if (event.cancelable) event.preventDefault();
         setPos(posFromEvent(event));
       }
